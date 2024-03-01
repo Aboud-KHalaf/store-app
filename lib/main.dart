@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/constants/app_theme.dart';
 import 'package:store_app/providers/theme_provider.dart';
+import 'package:store_app/root_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,19 +22,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           theme: AppTheme.themeData(
               isDarkTheme: themeProvider.darkTheme, context: context),
-          home: Scaffold(
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SwitchListTile(
-                    title: const Text('dark theme'),
-                    value: themeProvider.darkTheme,
-                    onChanged: (isdark) {
-                      themeProvider.setDarkTheme(isDarkTheme: isdark);
-                    })
-              ],
-            ),
-          ),
+          home: const RootScreen(),
+          routes: {},
         );
       }),
     );

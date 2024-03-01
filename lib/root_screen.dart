@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:store_app/screens/cart_screen.dart';
+import 'package:store_app/screens/home_screen.dart';
+import 'package:store_app/screens/profile_screen.dart';
+import 'package:store_app/screens/search_screen.dart';
+
+class RootScreen extends StatefulWidget {
+  const RootScreen({super.key});
+
+  @override
+  State<RootScreen> createState() => _RootScreenState();
+}
+
+class _RootScreenState extends State<RootScreen> {
+  late PageController _controller;
+  int currentScreen = 0;
+  List<Widget> screens = const [
+    HomeScreen(),
+    SearchScreen(),
+    CartScreen(),
+    ProfileScreen(),
+  ];
+
+  @override
+  void initState() {
+    _controller = PageController(
+      initialPage: currentScreen,
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageView(
+        onPageChanged: (index) => setState(() => currentScreen = index),
+        controller: _controller,
+        children: screens,
+      ),
+      bottomNavigationBar: NavigationBar(
+        elevation: 0,
+        selectedIndex: currentScreen,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        destinations: const [
+          NavigationDestination(
+            selectedIcon: Icon(IconlyBold.home),
+            icon: Icon(IconlyLight.home),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(IconlyBold.search),
+            icon: Icon(IconlyLight.search),
+            label: 'search',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(IconlyBold.bag2),
+            icon: Icon(IconlyLight.bag2),
+            label: 'bag2',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(IconlyBold.profile),
+            icon: Icon(IconlyLight.profile),
+            label: 'profile',
+          ),
+        ],
+        onDestinationSelected: (index) {
+          setState(() {
+            currentScreen = index;
+          });
+          _controller.jumpToPage(index);
+        },
+      ),
+    );
+  }
+}
