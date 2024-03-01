@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.themeData(
               isDarkTheme: themeProvider.darkTheme, context: context),
           home: const RootScreen(),
-          routes: {},
+          routes: const {},
         );
       }),
     );
