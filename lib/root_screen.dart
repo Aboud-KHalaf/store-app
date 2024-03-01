@@ -51,17 +51,17 @@ class _RootScreenState extends State<RootScreen> {
           NavigationDestination(
             selectedIcon: Icon(IconlyBold.search),
             icon: Icon(IconlyLight.search),
-            label: 'search',
+            label: 'Search',
           ),
           NavigationDestination(
             selectedIcon: Icon(IconlyBold.bag2),
             icon: Icon(IconlyLight.bag2),
-            label: 'bag2',
+            label: 'Cart',
           ),
           NavigationDestination(
             selectedIcon: Icon(IconlyBold.profile),
             icon: Icon(IconlyLight.profile),
-            label: 'profile',
+            label: 'Profile',
           ),
         ],
         onDestinationSelected: (index) {

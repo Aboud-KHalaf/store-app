@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SubTitleTextWidget extends StatelessWidget {
   const SubTitleTextWidget({
     super.key,
-    required this.labe,
+    required this.lable,
     this.fontSize = 18,
     this.color,
     this.maxLines,
@@ -12,7 +12,7 @@ class SubTitleTextWidget extends StatelessWidget {
     this.textDecoration = TextDecoration.none,
   });
 
-  final String labe;
+  final String lable;
   final double fontSize;
   final FontStyle fontStyle;
   final FontWeight fontWeight;
@@ -23,7 +23,7 @@ class SubTitleTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      labe,
+      lable,
       maxLines: maxLines,
       style: TextStyle(
         color: color,
