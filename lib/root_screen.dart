@@ -39,6 +39,7 @@ class _RootScreenState extends State<RootScreen> {
         children: screens,
       ),
       bottomNavigationBar: NavigationBar(
+        height: 75,
         elevation: 0,
         selectedIndex: currentScreen,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
