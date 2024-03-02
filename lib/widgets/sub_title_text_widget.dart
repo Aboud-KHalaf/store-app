@@ -31,7 +31,6 @@ class SubTitleTextWidget extends StatelessWidget {
         fontWeight: FontWeight.w800,
         fontStyle: fontStyle,
         decoration: textDecoration,
-        overflow: TextOverflow.ellipsis,
       ),
     );
   }

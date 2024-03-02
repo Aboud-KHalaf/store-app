@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_list_tile.dart';
 import 'package:store_app/constants/app_images.dart';
 import 'package:store_app/providers/theme_provider.dart';
+import 'package:store_app/widgets/shimmer_text_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 
@@ -13,7 +14,22 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Image.asset(
+              AppImages.imagesBagShoppingCart,
+              height: 45,
+              width: 45,
+            ),
+            const SizedBox(width: 8),
+            const ShimmerText(
+              fontWeight: FontWeight.w600,
+              text: 'AB  Store',
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -93,6 +109,7 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Center(
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(elevation: 8),
                       onPressed: () {},
                       child: const SubTitleTextWidget(
                         lable: 'log out',
