@@ -6,13 +6,13 @@ class TitleTextWidget extends StatelessWidget {
     required this.title,
     this.fontSize = 20,
     this.color,
-    this.maxLines,
+    this.maxLines = 1,
   });
 
   final String title;
   final double fontSize;
   final Color? color;
-  final int? maxLines;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {

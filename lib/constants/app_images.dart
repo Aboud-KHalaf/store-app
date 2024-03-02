@@ -1,6 +1,9 @@
 class AppImages {
   AppImages._();
 
+  static const String phone =
+      "https://s.studiobinder.com/wp-content/uploads/2021/08/Best-Camera-Phones-Samsung-Galaxy-Note-20-Ultra.jpg";
+
   /// Assets for imagesAddressMap
   /// assets/images/address_map.png
   static const String imagesAddressMap = "assets/images/address_map.png";
