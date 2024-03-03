@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
@@ -28,12 +31,16 @@ class CustomCartButtomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const SizedBox(width: 10),
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SubTitleTextWidget(lable: 'Total (6 Products / 9 Items)'),
-              SubTitleTextWidget(lable: '12312\$', color: Colors.blue),
-            ],
+          const Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                    child: SubTitleTextWidget(
+                        lable: 'Total (6 Products / 9 Items)')),
+                SubTitleTextWidget(lable: '12312\$', color: Colors.blue),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),

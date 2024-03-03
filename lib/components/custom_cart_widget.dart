@@ -75,6 +75,7 @@ class CustomCartWidget extends StatelessWidget {
                         OutlinedButton.icon(
                           onPressed: () async {
                             await showModalBottomSheet(
+                              isScrollControlled: false,
                               context: context,
                               builder: (context) {
                                 return const CustomModelButtomSheetChild();
