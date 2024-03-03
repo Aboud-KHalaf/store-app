@@ -24,15 +24,29 @@ class CustomCartButtomSheet extends StatelessWidget {
         ),
         color: (provider.darkTheme) ? Colors.black : Colors.white,
       ),
-      child: const Row(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(width: 10),
-          Column(
+          const SizedBox(width: 10),
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SubTitleTextWidget(lable: 'Total (6 Products / 9 Items)'),
               SubTitleTextWidget(lable: '12312\$', color: Colors.blue),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+              onPressed: () {},
+              color: Colors.cyan,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              child: const SubTitleTextWidget(
+                fontSize: 16,
+                lable: 'Checkout',
+              ),
+            ),
           )
         ],
       ),

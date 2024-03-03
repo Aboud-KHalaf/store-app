@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:store_app/components/custom_model_buttom_sheet_child.dart';
 import 'package:store_app/constants/app_images.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
@@ -9,8 +10,6 @@ class CustomCartWidget extends StatelessWidget {
   const CustomCartWidget({
     super.key,
   });
-
-  get index => null;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +73,14 @@ class CustomCartWidget extends StatelessWidget {
                           fontSize: 16,
                         ),
                         OutlinedButton.icon(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return const CustomModelButtomSheetChild();
+                              },
+                            );
+                          },
                           icon: const Icon(
                             IconlyLight.arrowDown2,
                           ),
