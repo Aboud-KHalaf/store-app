@@ -5,8 +5,9 @@ import 'package:store_app/widgets/shimmer_text_widget.dart';
 class AppBarRowWidget extends StatelessWidget {
   const AppBarRowWidget({
     super.key,
+    required this.text,
   });
-
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -17,9 +18,9 @@ class AppBarRowWidget extends StatelessWidget {
           width: 45,
         ),
         const SizedBox(width: 8),
-        const ShimmerText(
+        ShimmerText(
           fontWeight: FontWeight.w600,
-          text: 'AB  Store',
+          text: text,
         ),
       ],
     );

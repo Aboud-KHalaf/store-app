@@ -22,7 +22,9 @@ class CartScreen extends StatelessWidget {
         : Scaffold(
             bottomSheet: const CustomCartButtomSheet(),
             appBar: AppBar(
-              title: const AppBarRowWidget(),
+              title: const AppBarRowWidget(
+                text: 'Cart',
+              ),
               actions: [
                 IconButton(
                   onPressed: () {},

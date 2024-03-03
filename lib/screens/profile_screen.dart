@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
     final provider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarRowWidget(),
+        title: const AppBarRowWidget(text: 'elc store'),
       ),
       body: SingleChildScrollView(
         child: Column(
