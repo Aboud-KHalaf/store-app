@@ -11,6 +11,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool? isEmpty;
+    // ignore: unnecessary_null_comparison
     return isEmpty != null
         ? CustomEmptyCartWidget(
             title: AppTexts.woops,

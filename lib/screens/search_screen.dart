@@ -25,17 +25,18 @@ class _SearchScreenState extends State<SearchScreen> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-          appBar: AppBar(title: const AppBarRowWidget(text: 'Search')),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                CustomTextField(
-                  controller: textEditingController,
-                ),
-              ],
-            ),
-          )),
+        appBar: AppBar(title: const AppBarRowWidget(text: 'Search')),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              CustomTextField(
+                controller: textEditingController,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
