@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:store_app/screens/cart_screen.dart';
-import 'package:store_app/screens/home_screen.dart';
-import 'package:store_app/screens/profile_screen.dart';
-import 'package:store_app/screens/search_screen.dart';
+import 'package:store_app/screens/main_screens/cart_screen.dart';
+import 'package:store_app/screens/main_screens/home_screen.dart';
+import 'package:store_app/screens/main_screens/profile_screen.dart';
+import 'package:store_app/screens/main_screens/search_screen.dart';
 
 class RootScreen extends StatefulWidget {
   const RootScreen({super.key});
