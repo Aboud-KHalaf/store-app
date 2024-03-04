@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:store_app/components/custom_model_buttom_sheet_child.dart';
 import 'package:store_app/constants/app_images.dart';
+import 'package:store_app/widgets/like_button_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 
@@ -53,12 +54,9 @@ class CustomCartWidget extends StatelessWidget {
                                 color: Colors.red,
                               ),
                             ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                IconlyLight.heart,
-                                color: Colors.red,
-                              ),
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: LikeButtonWidget(),
                             ),
                           ],
                         )

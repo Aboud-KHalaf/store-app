@@ -1,8 +1,8 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:store_app/constants/app_images.dart';
 import 'package:store_app/screens/inner_screens/product_details_screen.dart';
+import 'package:store_app/widgets/like_button_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
 class CustomSearchProductItem extends StatelessWidget {
@@ -40,13 +40,8 @@ class CustomSearchProductItem extends StatelessWidget {
                     lable: 'samsung' * 10,
                   ),
                 ),
-                Flexible(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      IconlyLight.heart,
-                    ),
-                  ),
+                const Flexible(
+                  child: LikeButtonWidget(),
                 ),
               ],
             ),
