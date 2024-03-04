@@ -18,7 +18,7 @@ class ShimmerText extends StatelessWidget {
     return Shimmer.fromColors(
       period: const Duration(seconds: 10),
       baseColor: Colors.purple,
-      highlightColor: Colors.red,
+      highlightColor: Colors.cyan,
       child: Text(
         text,
         style: TextStyle(
