@@ -1,8 +1,15 @@
 class AppImages {
   AppImages._();
 
+  static List<String> banners = [
+    imagesBannersBanner1,
+    imagesBannersBanner2,
+  ];
+
   static const String phone =
       "https://s.studiobinder.com/wp-content/uploads/2021/08/Best-Camera-Phones-Samsung-Galaxy-Note-20-Ultra.jpg";
+  static const String phone2 =
+      "https://www.notebookcheck.nl/fileadmin/Notebooks/News/_nc3/csm_Bild_Samsung_Galaxy_S23_Ultra_Outdoor_4873_71b315d32f.jpg";
 
   /// Assets for imagesAddressMap
   /// assets/images/address_map.png
