@@ -26,12 +26,12 @@ class SubTitleTextWidget extends StatelessWidget {
       lable,
       maxLines: maxLines,
       style: TextStyle(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: FontWeight.w800,
-        fontStyle: fontStyle,
-        decoration: textDecoration,
-      ),
+          color: color,
+          fontSize: fontSize,
+          fontWeight: FontWeight.w800,
+          fontStyle: fontStyle,
+          decoration: textDecoration,
+          overflow: TextOverflow.ellipsis),
     );
   }
 }
