@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_list_tile.dart';
 import 'package:store_app/constants/app_images.dart';
 import 'package:store_app/providers/theme_provider.dart';
+import 'package:store_app/screens/inner_screens/viewed_recently.dart';
+import 'package:store_app/screens/inner_screens/wish_list_screen.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
@@ -65,17 +67,23 @@ class ProfileScreen extends StatelessWidget {
                   CustomListTile(
                     imageUrl: AppImages.imagesBagOrderSvg,
                     title: 'All orders',
-                    ontap: () {},
+                    ontap: () {
+                      // Navigator.of(context).pushNamed(routeName)
+                    },
                   ),
                   CustomListTile(
                     imageUrl: AppImages.imagesBagWishlistSvg,
                     title: 'wishlist',
-                    ontap: () {},
+                    ontap: () {
+                      Navigator.of(context).pushNamed(WishListScreen.pageRoute);
+                    },
                   ),
                   CustomListTile(
                     imageUrl: AppImages.imagesProfileRecent,
                     title: 'Viewed recently',
-                    ontap: () {},
+                    ontap: () {
+                      Navigator.of(context).pushNamed(ViewedRecently.pageRoute);
+                    },
                   ),
                   CustomListTile(
                     imageUrl: AppImages.imagesProfileAddress,

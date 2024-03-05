@@ -10,9 +10,9 @@ class CustomEmptyCartWidget extends StatelessWidget {
       required this.subTitile,
       required this.text,
       required this.buttonText,
-      required this.onPressed});
+      required this.onPressed, required this.image});
 
-  final String title, subTitile, text, buttonText;
+  final String title, subTitile, text, buttonText , image;
   final void Function() onPressed;
 
   @override
@@ -25,7 +25,7 @@ class CustomEmptyCartWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 40),
             Image.asset(
-              AppImages.imagesBagShoppingBasket,
+              image,
               height: size.height * 0.35,
               width: double.infinity,
             ),

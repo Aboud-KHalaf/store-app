@@ -4,6 +4,8 @@ import 'package:store_app/constants/app_theme.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/inner_screens/product_details_screen.dart';
+import 'package:store_app/screens/inner_screens/viewed_recently.dart';
+import 'package:store_app/screens/inner_screens/wish_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,9 +29,14 @@ class MyApp extends StatelessWidget {
           routes: {
             ProductDetailsScreen.pageRoute: (context) =>
                 const ProductDetailsScreen(),
+            WishListScreen.pageRoute: (context) => const WishListScreen(),
+            ViewedRecently.pageRoute: (context) => const ViewedRecently(),
           },
         );
       }),
     );
   }
 }
+
+// dart fix --apply
+// dart format .
