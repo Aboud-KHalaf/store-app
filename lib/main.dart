@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:store_app/helpers/app_theme.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/screens/auth/signin_screen.dart';
+import 'package:store_app/screens/auth/signup_screen.dart';
 import 'package:store_app/screens/inner/product_details_screen.dart';
 import 'package:store_app/screens/inner/viewed_recently.dart';
 import 'package:store_app/screens/inner/wish_list_screen.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
             WishListScreen.pageRoute: (context) => const WishListScreen(),
             ViewedRecently.pageRoute: (context) => const ViewedRecently(),
             SigninScreen.pageRoute: (context) => const SigninScreen(),
+            SignupScreen.pageRoute: (context) => const SignupScreen(),
           },
         );
       }),
