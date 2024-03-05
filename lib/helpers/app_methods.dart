@@ -6,7 +6,7 @@ abstract class AppMethods {
     required BuildContext context,
     required String subTitle,
     required String image,
-    required Function fct,
+    required void Function() fcn,
     bool isError = true,
   }) async {
     await showDialog(
@@ -43,7 +43,7 @@ abstract class AppMethods {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: fcn,
                       child: const SubTitleTextWidget(
                         lable: 'ok',
                         color: Colors.green,

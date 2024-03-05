@@ -21,6 +21,12 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {

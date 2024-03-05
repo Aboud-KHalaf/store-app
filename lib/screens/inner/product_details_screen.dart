@@ -58,10 +58,12 @@ class ProductDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      const CircleAvatar(
+                          child: Padding(
+                        padding: EdgeInsets.only(bottom: 5, right: 3),
                         child: LikeButtonWidget(),
-                      ),
+                      )),
+                      const SizedBox(width: 10),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           elevation: 8,
@@ -75,7 +77,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               Icons.shopping_basket_outlined,
                             ),
                             SizedBox(width: 10),
-                            Text('Add to Cart')
+                            Text('Add to Cart'),
                           ],
                         ),
                       ),

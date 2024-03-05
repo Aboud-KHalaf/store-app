@@ -4,8 +4,9 @@ import 'package:store_app/components/custom_list_tile.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/providers/theme_provider.dart';
-import 'package:store_app/screens/inner_screens/viewed_recently.dart';
-import 'package:store_app/screens/inner_screens/wish_list_screen.dart';
+import 'package:store_app/screens/auth/signin_screen.dart';
+import 'package:store_app/screens/inner/viewed_recently.dart';
+import 'package:store_app/screens/inner/wish_list_screen.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
@@ -108,10 +109,10 @@ class ProfileScreen extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         elevation: 8,
-                        maximumSize: const Size(150, 50),
                       ),
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
                             Icons.exit_to_app_outlined,
@@ -119,17 +120,20 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           SizedBox(width: 10),
                           SubTitleTextWidget(
-                            lable: 'log out',
+                            lable: 'Sign out',
                             color: Colors.red,
                           ),
                         ],
                       ),
                       onPressed: () async {
-                        AppMethods.showErrorOrWaringDialog(
+                        await AppMethods.showErrorOrWaringDialog(
                           context: context,
                           subTitle: 'You will sign out',
                           image: AppImages.imagesWarning,
-                          fct: () {},
+                          fcn: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed(SigninScreen.pageRoute);
+                          },
                         );
                       },
                     ),

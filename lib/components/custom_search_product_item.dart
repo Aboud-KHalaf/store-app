@@ -1,7 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/helpers/app_images.dart';
-import 'package:store_app/screens/inner_screens/product_details_screen.dart';
+import 'package:store_app/screens/inner/product_details_screen.dart';
 import 'package:store_app/widgets/like_button_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
