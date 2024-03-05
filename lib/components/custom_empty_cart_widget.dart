@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/constants/app_images.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 

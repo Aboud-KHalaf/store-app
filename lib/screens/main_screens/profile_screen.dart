@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_list_tile.dart';
-import 'package:store_app/constants/app_images.dart';
+import 'package:store_app/helpers/app_images.dart';
+import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/screens/inner_screens/viewed_recently.dart';
 import 'package:store_app/screens/inner_screens/wish_list_screen.dart';
@@ -109,7 +110,6 @@ class ProfileScreen extends StatelessWidget {
                         elevation: 8,
                         maximumSize: const Size(150, 50),
                       ),
-                      onPressed: () {},
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -124,6 +124,14 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      onPressed: () async {
+                        AppMethods.showErrorOrWaringDialog(
+                          context: context,
+                          subTitle: 'You will sign out',
+                          image: AppImages.imagesWarning,
+                          fct: () {},
+                        );
+                      },
                     ),
                   )
                 ],

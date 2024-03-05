@@ -1,6 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:store_app/constants/app_images.dart';
+import 'package:store_app/helpers/app_images.dart';
 
 class CustomSwiperWidget extends StatelessWidget {
   const CustomSwiperWidget({
