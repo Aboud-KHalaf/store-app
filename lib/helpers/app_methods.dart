@@ -58,4 +58,56 @@ abstract class AppMethods {
       },
     );
   }
+
+  //  //  //  //  //  //  //  //  //  //  //  //  //  //
+
+  static Future<void> showImagepickerDialog({
+    required BuildContext context,
+    required Function cameraFun,
+    required Function galaryFun,
+    required Function removeFun,
+  }) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Center(
+            child: SubTitleTextWidget(
+              lable: 'Choose option',
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    cameraFun();
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.camera),
+                  label: const Text('Camera'),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    galaryFun();
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.image),
+                  label: const Text('Gallery'),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    removeFun();
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.remove),
+                  label: const Text('Remove'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

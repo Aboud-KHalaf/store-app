@@ -5,6 +5,7 @@ import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/screens/auth/signin_screen.dart';
+import 'package:store_app/screens/inner/all_orders_screen.dart';
 import 'package:store_app/screens/inner/viewed_recently.dart';
 import 'package:store_app/screens/inner/wish_list_screen.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
@@ -70,7 +71,8 @@ class ProfileScreen extends StatelessWidget {
                     imageUrl: AppImages.imagesBagOrderSvg,
                     title: 'All orders',
                     ontap: () {
-                      // Navigator.of(context).pushNamed(routeName)
+                      Navigator.of(context)
+                          .pushNamed(AllOrdersScreen.pageRoute);
                     },
                   ),
                   CustomListTile(

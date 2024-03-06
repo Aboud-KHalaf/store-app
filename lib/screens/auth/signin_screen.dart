@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:store_app/components/custom_text_form_field.dart';
 import 'package:store_app/helpers/app_text.dart';
+import 'package:store_app/screens/auth/forget_password_screen.dart';
 import 'package:store_app/screens/auth/signup_screen.dart';
 import 'package:store_app/widgets/app_title_widget.dart';
 import 'package:store_app/widgets/google_button_widget.dart';
@@ -59,6 +60,7 @@ class _SigninScreenState extends State<SigninScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +108,10 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                   Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(ForgetPassword.pageRoute);
+                      },
                       child: const SubTitleTextWidget(
                         lable: 'Forget your password?',
                         fontStyle: FontStyle.italic,

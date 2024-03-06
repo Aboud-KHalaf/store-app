@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:store_app/components/custom_text_form_field.dart';
+import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/widgets/app_title_widget.dart';
+import 'package:store_app/widgets/pick_image_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 
@@ -23,13 +26,14 @@ class _SignupScreenState extends State<SignupScreen> {
   late final FocusNode _nameFocusNode;
   late final FocusNode _confirmPasswordFocusNode;
   final _formKey = GlobalKey<FormState>();
+  XFile? pickedImage;
 
   @override
   void initState() {
+    _nameFocusNode = FocusNode();
     _emailFocusNode = FocusNode();
     _passwordFocusNode = FocusNode();
     _confirmPasswordFocusNode = FocusNode();
-    _nameFocusNode = FocusNode();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _nameController = TextEditingController();
@@ -50,13 +54,35 @@ class _SignupScreenState extends State<SignupScreen> {
     super.dispose();
   }
 
+  Future<void> localImagePicker() async {
+    final ImagePicker imagePicker = ImagePicker();
+    await AppMethods.showImagepickerDialog(
+      context: context,
+      cameraFun: () async {
+        pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+        setState(() {});
+      },
+      galaryFun: () async {
+        pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+        setState(() {});
+      },
+      removeFun: () {
+        setState(() {
+          pickedImage = null;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -76,11 +102,26 @@ class _SignupScreenState extends State<SignupScreen> {
                     maxLines: 2,
                   ),
                   const SizedBox(height: 20),
+                  Center(
+                    child: SizedBox(
+                      height: size.width * 0.4,
+                      width: size.width * 0.4,
+                      child: PickImageWidget(
+                        pickedImage: pickedImage,
+                        function: () async {
+                          await localImagePicker();
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   CustomTextFormField(
                     controller: _nameController,
                     focusNode: _nameFocusNode,
                     hintText: 'Full name',
-                    validator: (p0) {},
+                    validator: (p0) {
+                      return null;
+                    },
                     onFieldSubmitted: (p0) {},
                     icon: Icons.person,
                   ),
@@ -89,7 +130,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _emailController,
                     focusNode: _emailFocusNode,
                     hintText: 'Email Address',
-                    validator: (p0) {},
+                    validator: (p0) {
+                      return null;
+                    },
                     onFieldSubmitted: (p0) {},
                     icon: Icons.email,
                   ),
@@ -98,8 +141,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     hintText: 'password',
-                    validator: (p0) {},
-                    onFieldSubmitted: (p0) {},
+                    validator: (p0) {
+                      return null;
+                    },
+                    onFieldSubmitted: (p0) {
+                      return;
+                    },
                     icon: Icons.password,
                   ),
                   const SizedBox(height: 10),
@@ -107,7 +154,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
                     hintText: 'Confirm password',
-                    validator: (p0) {},
+                    validator: (p0) {
+                      return null;
+                    },
                     onFieldSubmitted: (p0) {},
                     icon: Icons.password_outlined,
                   ),
