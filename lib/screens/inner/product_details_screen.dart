@@ -2,6 +2,7 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/models/product_model.dart';
+import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/like_button_widget.dart';
@@ -20,6 +21,7 @@ class ProductDetailsScreen extends StatelessWidget {
     final ProductProvider productProvider =
         Provider.of<ProductProvider>(context);
     ProductModel productItem = productProvider.findByProductId(productId);
+    final CartProvider cartProvider = Provider.of(context);
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -76,16 +78,23 @@ class ProductDetailsScreen extends StatelessWidget {
                           elevation: 8,
                           maximumSize: const Size(250, 50),
                         ),
-                        onPressed: () {},
-                        child: const Row(
+                        onPressed: () {
+                          cartProvider.addProductToCart(productId: productId);
+                        },
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.shopping_cart_checkout_outlined,
+                              cartProvider.isProductInCart(productId: productId)
+                                  ? Icons.check
+                                  : Icons.shopping_cart_checkout_outlined,
                               color: Colors.cyan,
                             ),
-                            SizedBox(width: 10),
-                            Text('Add to Cart'),
+                            const SizedBox(width: 10),
+                            Text(cartProvider.isProductInCart(
+                                    productId: productId)
+                                ? ' In Cart '
+                                : ' Add to Cart '),
                           ],
                         ),
                       ),

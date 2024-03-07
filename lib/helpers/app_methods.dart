@@ -25,7 +25,10 @@ abstract class AppMethods {
                   height: 100,
                 ),
                 const SizedBox(height: 10),
-                SubTitleTextWidget(lable: subTitle),
+                SubTitleTextWidget(
+                  lable: subTitle,
+                  maxLines: 2,
+                ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

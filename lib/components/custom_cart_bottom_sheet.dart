@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:store_app/providers/cart_provider.dart';
+import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
@@ -11,6 +13,9 @@ class CustomCartButtomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeProvider provider = Provider.of<ThemeProvider>(context);
+    final CartProvider cartProvider = Provider.of<CartProvider>(context);
+    final ProductProvider productProvider =
+        Provider.of<ProductProvider>(context);
 
     return Container(
       height: 60,
@@ -28,14 +33,18 @@ class CustomCartButtomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const SizedBox(width: 10),
-          const Flexible(
+          Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FittedBox(
                     child: SubTitleTextWidget(
-                        lable: 'Total (6 Products / 9 Items)')),
-                SubTitleTextWidget(lable: '12312\$', color: Colors.blue),
+                        lable:
+                            'Total (${cartProvider.getCartItems.length} Products / ${cartProvider.getTotal(productProvider: productProvider).$2} Items)')),
+                SubTitleTextWidget(
+                    lable:
+                        '${cartProvider.getTotal(productProvider: productProvider).$1}\$',
+                    color: Colors.blue),
               ],
             ),
           ),

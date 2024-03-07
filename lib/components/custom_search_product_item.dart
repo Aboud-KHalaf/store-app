@@ -1,7 +1,9 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/models/product_model.dart';
+import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/screens/inner/product_details_screen.dart';
 import 'package:store_app/widgets/like_button_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
@@ -17,6 +19,7 @@ class CustomSearchProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return InkWell(
       borderRadius: BorderRadius.circular(8),
@@ -68,9 +71,16 @@ class CustomSearchProductItem extends StatelessWidget {
                     backgroundColor: Colors.cyan,
                     child: IconButton(
                       padding: EdgeInsets.zero,
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.shopping_cart_checkout,
+                      onPressed: () {
+                        cartProvider.addProductToCart(
+                          productId: productItem.productId,
+                        );
+                      },
+                      icon: Icon(
+                        (cartProvider.isProductInCart(
+                                productId: productItem.productId))
+                            ? Icons.check
+                            : Icons.shopping_cart_checkout,
                         size: 20,
                       ),
                     ),

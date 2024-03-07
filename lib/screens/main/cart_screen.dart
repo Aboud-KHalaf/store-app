@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_cart_bottom_sheet.dart';
 import 'package:store_app/components/custom_cart_widget.dart';
 import 'package:store_app/components/custom_empty_cart_widget.dart';
 import 'package:store_app/helpers/app_images.dart';
+import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
+import 'package:store_app/models/cart_model.dart';
+import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 
 class CartScreen extends StatelessWidget {
@@ -11,9 +15,11 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool? isEmpty;
+    final CartProvider cartProvider = Provider.of(context);
+    List<CartModel> cartList = cartProvider.getCartItems.values.toList();
+
     // ignore: unnecessary_null_comparison
-    return isEmpty != null
+    return cartList.isEmpty
         ? CustomEmptyCartWidget(
             image: AppImages.imagesBagShoppingBasket,
             title: AppTexts.woops,
@@ -25,12 +31,23 @@ class CartScreen extends StatelessWidget {
         : Scaffold(
             bottomSheet: const CustomCartButtomSheet(),
             appBar: AppBar(
-              title: const AppBarRowWidget(
-                text: 'Cart',
+              title: AppBarRowWidget(
+                text: 'Cart (${cartList.length})',
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AppMethods.showErrorOrWaringDialog(
+                      context: context,
+                      subTitle: 'Do you realy want to clear your cart ?',
+                      image: AppImages.imagesWarning,
+                      fcn: () {
+                        cartProvider.clearCartMap();
+                        Navigator.pop(context);
+                      },
+                      isError: true,
+                    );
+                  },
                   icon: const Icon(
                     Icons.delete,
                     color: Colors.red,
@@ -39,11 +56,16 @@ class CartScreen extends StatelessWidget {
               ],
             ),
             body: ListView.builder(
-              itemCount: 10,
+              itemCount: cartProvider.getCartItems.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: EdgeInsets.only(bottom: (index == 9) ? 55 : 0),
-                  child: const CustomCartWidget(),
+                  padding: EdgeInsets.only(
+                      bottom: (index == cartProvider.getCartItems.length - 1)
+                          ? 55
+                          : 0),
+                  child: CustomCartWidget(
+                    cartModel: cartList[index],
+                  ),
                 );
               },
             ),
