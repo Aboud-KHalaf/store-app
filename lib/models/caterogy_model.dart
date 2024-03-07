@@ -10,24 +10,24 @@ class Category {
 
 List<Category> categories = [
   Category(
-    id: AppImages.imagesCategoriesBookImg,
-    text: 'Book',
-    image: AppImages.imagesCategoriesBookImg,
-  ),
-  Category(
-    id: AppImages.imagesCategoriesFashion,
-    text: 'Fation',
-    image: AppImages.imagesCategoriesFashion,
-  ),
-  Category(
     id: AppImages.imagesCategoriesMobiles,
-    text: 'Mobile',
+    text: 'Phones',
     image: AppImages.imagesCategoriesMobiles,
   ),
   Category(
+    id: AppImages.imagesCategoriesBookImg,
+    text: 'Books',
+    image: AppImages.imagesCategoriesBookImg,
+  ),
+  Category(
     id: AppImages.imagesCategoriesPc,
-    text: 'Pc',
+    text: 'Laptops',
     image: AppImages.imagesCategoriesPc,
+  ),
+  Category(
+    id: AppImages.imagesCategoriesFashion,
+    text: 'Clothes',
+    image: AppImages.imagesCategoriesFashion,
   ),
   Category(
     id: AppImages.imagesCategoriesShoes,
@@ -36,7 +36,7 @@ List<Category> categories = [
   ),
   Category(
     id: AppImages.imagesCategoriesWatch,
-    text: 'Watch',
+    text: 'Watches',
     image: AppImages.imagesCategoriesWatch,
   ),
   Category(

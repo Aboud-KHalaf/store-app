@@ -4,13 +4,18 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
+    required this.onSubmitted,
+    required this.onChanged,
   });
   final TextEditingController controller;
+  final Function(String) onSubmitted;
+  final Function(String) onChanged;
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      onSubmitted: (searchText) {},
+      onSubmitted: onSubmitted,
+      onChanged: onChanged,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(16),
         suffixIcon: IconButton(
@@ -23,11 +28,8 @@ class CustomTextField extends StatelessWidget {
             color: Colors.red,
           ),
         ),
-        prefixIcon: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.search,
-          ),
+        prefixIcon: const Icon(
+          Icons.search,
         ),
         filled: true,
         enabledBorder: OutlineInputBorder(

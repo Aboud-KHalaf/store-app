@@ -1,6 +1,8 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:store_app/helpers/app_images.dart';
+import 'package:provider/provider.dart';
+import 'package:store_app/models/product_model.dart';
+import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/like_button_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
@@ -13,6 +15,11 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ThemeProvider provider = Provider.of<ThemeProvider>(context);
+    final String productId =
+        ModalRoute.of(context)!.settings.arguments as String;
+    final ProductProvider productProvider =
+        Provider.of<ProductProvider>(context);
+    ProductModel productItem = productProvider.findByProductId(productId);
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -23,11 +30,14 @@ class ProductDetailsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            FancyShimmerImage(
-              imageUrl: AppImages.phone,
-              height: size.height * 0.32,
-              width: double.infinity,
-              boxFit: BoxFit.contain,
+            Hero(
+              tag: productId,
+              child: FancyShimmerImage(
+                imageUrl: productItem.productImage,
+                height: size.height * 0.32,
+                width: double.infinity,
+                boxFit: BoxFit.contain,
+              ),
             ),
             const SizedBox(height: 20),
             Padding(
@@ -36,19 +46,20 @@ class ProductDetailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Flexible(
                         child: Text(
-                          'samsung' * 5,
+                          productItem.productTitle,
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
                           ),
                         ),
                       ),
-                      const SubTitleTextWidget(
-                        lable: '1399.99\$',
+                      SubTitleTextWidget(
+                        lable: '${productItem.productPrice}\$',
                         color: Colors.blue,
                         fontSize: 20,
                       ),
@@ -58,11 +69,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
-                          child: Padding(
-                        padding: EdgeInsets.only(bottom: 5, right: 3),
-                        child: LikeButtonWidget(),
-                      )),
+                      const CircleAvatar(child: LikeButtonWidget()),
                       const SizedBox(width: 10),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -74,7 +81,8 @@ class ProductDetailsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.shopping_basket_outlined,
+                              Icons.shopping_cart_checkout_outlined,
+                              color: Colors.cyan,
                             ),
                             SizedBox(width: 10),
                             Text('Add to Cart'),
@@ -84,18 +92,18 @@ class ProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TitleTextWidget(title: 'Aboud this item'),
+                      const TitleTextWidget(title: 'Aboud this item'),
                       TitleTextWidget(
-                        title: 'in Phones',
+                        title: 'in ${productItem.productCategory}',
                         fontSize: 16,
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Text('this is product details ' * 60),
+                  Text(productItem.productDescription),
                 ],
               ),
             ),

@@ -8,7 +8,8 @@ class LikeButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LikeButton(
-      size: 18,
+      padding: EdgeInsets.zero,
+      size: 22,
       circleColor:
           const CircleColor(start: Color(0xff00ddff), end: Color(0xff0099cc)),
       bubblesColor: const BubblesColor(

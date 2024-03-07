@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/helpers/app_theme.dart';
+import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/auth/forget_password_screen.dart';
@@ -10,6 +11,7 @@ import 'package:store_app/screens/inner/all_orders_screen.dart';
 import 'package:store_app/screens/inner/product_details_screen.dart';
 import 'package:store_app/screens/inner/viewed_recently.dart';
 import 'package:store_app/screens/inner/wish_list_screen.dart';
+import 'package:store_app/screens/main/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +25,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(
@@ -40,6 +45,7 @@ class MyApp extends StatelessWidget {
               SignupScreen.pageRoute: (context) => const SignupScreen(),
               AllOrdersScreen.pageRoute: (context) => const AllOrdersScreen(),
               ForgetPassword.pageRoute: (context) => const ForgetPassword(),
+              SearchScreen.pageRoute: (context) => const SearchScreen(),
             },
           );
         },

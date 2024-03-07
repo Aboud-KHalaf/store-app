@@ -3,6 +3,7 @@ import 'package:store_app/components/custom_category_item.dart';
 import 'package:store_app/components/custom_leatest_arrivel_item.dart';
 import 'package:store_app/components/custom_swiper_widget.dart';
 import 'package:store_app/models/caterogy_model.dart';
+import 'package:store_app/screens/main/search_screen.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
@@ -58,7 +59,12 @@ class HomeScreen extends StatelessWidget {
                   categories.length,
                   (index) {
                     return GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          SearchScreen.pageRoute,
+                          arguments: categories[index].text,
+                        );
+                      },
                       child: CustomCategoryItem(
                         image: categories[index].image,
                         text: categories[index].text,

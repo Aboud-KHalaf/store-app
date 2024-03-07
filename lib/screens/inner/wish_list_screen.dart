@@ -44,7 +44,7 @@ class WishListScreen extends StatelessWidget {
                 itemCount: 5,
                 crossAxisCount: 2,
                 builder: (context, index) {
-                  return const CustomSearchProductItem();
+                  return Container(); //const CustomSearchProductItem();
                 },
               ),
             ),
