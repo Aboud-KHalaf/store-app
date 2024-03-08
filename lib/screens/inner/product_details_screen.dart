@@ -71,7 +71,10 @@ class ProductDetailsScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircleAvatar(child: LikeButtonWidget()),
+                      CircleAvatar(
+                          child: LikeButtonWidget(
+                        productId: productId,
+                      )),
                       const SizedBox(width: 10),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(

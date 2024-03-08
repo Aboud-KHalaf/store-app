@@ -1,33 +1,41 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
-import 'package:store_app/helpers/app_images.dart';
+import 'package:store_app/models/product_model.dart';
+import 'package:store_app/screens/inner/product_details_screen.dart';
 import 'package:store_app/widgets/like_button_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
 class CustomLeatestArrivalWidget extends StatelessWidget {
   const CustomLeatestArrivalWidget({
     super.key,
+    required this.productItem,
   });
+
+  final ProductModel productItem;
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamed(ProductDetailsScreen.pageRoute,
+            arguments: productItem.productId);
+      },
       borderRadius: BorderRadius.circular(8),
       child: SizedBox(
-        width: size.width * 0.40,
+        width: size.width * 0.48,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: FancyShimmerImage(
-                  imageUrl: AppImages.phone,
-                  height: double.infinity,
-                  width: double.infinity,
+                child: Hero(
+                  tag: productItem.productId,
+                  child: FancyShimmerImage(
+                    imageUrl: productItem.productImage,
+                  ),
                 ),
               ),
             ),
@@ -38,7 +46,7 @@ class CustomLeatestArrivalWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SubTitleTextWidget(
-                    lable: 'title' * 10,
+                    lable: productItem.productTitle,
                     maxLines: 2,
                     fontSize: 16,
                   ),
@@ -52,12 +60,14 @@ class CustomLeatestArrivalWidget extends StatelessWidget {
                             Icons.shopping_cart_checkout_outlined,
                           ),
                         ),
-                        const LikeButtonWidget(),
+                        LikeButtonWidget(
+                          productId: productItem.productId,
+                        ),
                       ],
                     ),
                   ),
-                  const SubTitleTextWidget(
-                    lable: '199\$',
+                  SubTitleTextWidget(
+                    lable: '${productItem.productPrice} \$',
                     color: Colors.blue,
                     fontSize: 14,
                   ),

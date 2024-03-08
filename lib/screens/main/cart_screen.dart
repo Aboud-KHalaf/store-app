@@ -18,7 +18,6 @@ class CartScreen extends StatelessWidget {
     final CartProvider cartProvider = Provider.of(context);
     List<CartModel> cartList = cartProvider.getCartItems.values.toList();
 
-    // ignore: unnecessary_null_comparison
     return cartList.isEmpty
         ? CustomEmptyCartWidget(
             image: AppImages.imagesBagShoppingBasket,

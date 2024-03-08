@@ -59,7 +59,7 @@ class _RootScreenState extends State<RootScreen> {
             label: 'Search',
           ),
           NavigationDestination(
-            selectedIcon: Icon(IconlyBold.bag2),
+            selectedIcon: const Icon(IconlyBold.bag2),
             icon: Badge(
               label: Text(length.toString()),
               child: const Icon(IconlyLight.bag2),

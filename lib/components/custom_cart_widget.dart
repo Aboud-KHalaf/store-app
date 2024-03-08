@@ -78,9 +78,11 @@ class CustomCartWidget extends StatelessWidget {
                                   color: Colors.red,
                                 ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: LikeButtonWidget(),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: LikeButtonWidget(
+                                  productId: prodtId,
+                                ),
                               ),
                             ],
                           )

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/helpers/app_theme.dart';
 import 'package:store_app/providers/cart_provider.dart';
+import 'package:store_app/providers/leatest_arrivel_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
+import 'package:store_app/providers/wishList_provider.dart';
 import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/auth/forget_password_screen.dart';
 import 'package:store_app/screens/auth/signin_screen.dart';
@@ -32,6 +34,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WishListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ViewedRecentProider(),
         ),
       ],
       child: Consumer<ThemeProvider>(

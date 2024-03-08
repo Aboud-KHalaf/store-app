@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_category_item.dart';
 import 'package:store_app/components/custom_leatest_arrivel_item.dart';
 import 'package:store_app/components/custom_swiper_widget.dart';
 import 'package:store_app/models/caterogy_model.dart';
+import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/screens/main/search_screen.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
@@ -14,6 +16,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final ProductProvider productProvider =
+        Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const AppBarRowWidget(text: 'ETC Store'),
@@ -38,9 +42,10 @@ class HomeScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: 15,
                   itemBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CustomLeatestArrivalWidget(),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CustomLeatestArrivalWidget(
+                          productItem: productProvider.getProductList[index]),
                     );
                   },
                 ),
