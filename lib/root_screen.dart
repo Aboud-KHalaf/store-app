@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
+import 'package:store_app/helpers/app_lists_and_maps.dart';
 import 'package:store_app/providers/cart_provider.dart';
-import 'package:store_app/screens/main/cart_screen.dart';
-import 'package:store_app/screens/main/home_screen.dart';
-import 'package:store_app/screens/main/profile_screen.dart';
-import 'package:store_app/screens/main/search_screen.dart';
 
 class RootScreen extends StatefulWidget {
+  static const String routeName = '/';
   const RootScreen({super.key});
 
   @override
@@ -17,12 +15,6 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   late PageController _controller;
   int currentScreen = 0;
-  List<Widget> screens = const [
-    HomeScreen(),
-    SearchScreen(),
-    CartScreen(),
-    ProfileScreen(),
-  ];
 
   @override
   void initState() {
@@ -40,7 +32,7 @@ class _RootScreenState extends State<RootScreen> {
       body: PageView(
         onPageChanged: (index) => setState(() => currentScreen = index),
         controller: _controller,
-        children: screens,
+        children: AppListsAndMaps.screens,
       ),
       bottomNavigationBar: NavigationBar(
         height: 75,

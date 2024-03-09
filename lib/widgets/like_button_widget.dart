@@ -33,7 +33,7 @@ class LikeButtonWidget extends StatelessWidget {
           icon: Icon(
             !isLiked ? IconlyLight.heart : IconlyBold.heart,
             color: Colors.red,
-            size: 24,
+            size: 22,
           ),
         );
       },

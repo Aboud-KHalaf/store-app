@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_category_item.dart';
 import 'package:store_app/components/custom_leatest_arrivel_item.dart';
 import 'package:store_app/components/custom_swiper_widget.dart';
+import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/models/caterogy_model.dart';
 import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/screens/main/search_screen.dart';
@@ -20,7 +21,9 @@ class HomeScreen extends StatelessWidget {
         Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarRowWidget(text: 'ETC Store'),
+        title: const AppBarRowWidget(
+          text: AppTexts.appName,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -45,7 +48,8 @@ class HomeScreen extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CustomLeatestArrivalWidget(
-                          productItem: productProvider.getProductList[index]),
+                        productItem: productProvider.getProductList[index],
+                      ),
                     );
                   },
                 ),

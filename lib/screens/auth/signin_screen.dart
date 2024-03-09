@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_text_form_field.dart';
 import 'package:store_app/helpers/app_text.dart';
+import 'package:store_app/helpers/app_validator.dart';
+import 'package:store_app/providers/auth_provider.dart';
+import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/auth/forget_password_screen.dart';
 import 'package:store_app/screens/auth/signup_screen.dart';
 import 'package:store_app/widgets/app_title_widget.dart';
@@ -23,6 +27,7 @@ class _SigninScreenState extends State<SigninScreen> {
   late final FocusNode _emailFocusNode;
   late final FocusNode _passwordFocusNode;
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -42,17 +47,33 @@ class _SigninScreenState extends State<SigninScreen> {
     super.dispose();
   }
 
+  Future<void> _signIn(
+      {required String email, required String password}) async {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+    if (isValid) {
+      setState(() {
+        isLoading = true;
+      });
+      var res = await Provider.of<AuthProvider>(context, listen: false)
+          .signIn(email, password);
+      res.fold(
+          (l) => ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(l))), (r) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Successful signIn')));
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
+        }
+      });
+      setState(() {
+        isLoading = false;
+      });
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
-    Future<void> loginFct() async {
-      final isValid = _formKey.currentState!.validate();
-      FocusScope.of(context).unfocus();
-      if (isValid) {
-      } else {
-        print('not valid');
-      }
-    }
-
     return Scaffold(
       body: SafeArea(
         child: Form(
@@ -72,6 +93,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   const SubTitleTextWidget(
                     lable: AppTexts.letsLoggedIn,
                     fontSize: 14,
+                    maxLines: 3,
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
@@ -83,10 +105,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       FocusScope.of(context).requestFocus(_passwordFocusNode);
                     },
                     validator: (value) {
-                      if (value == 'aboud') {
-                        return 'aboud is your ancle';
-                      }
-                      return null;
+                      return AppValidators.emailValidator(value);
                     },
                   ),
                   const SizedBox(height: 10),
@@ -95,14 +114,9 @@ class _SigninScreenState extends State<SigninScreen> {
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     hintText: 'password',
-                    onFieldSubmitted: (value) {
-                      loginFct();
-                    },
+                    onFieldSubmitted: (value) {},
                     validator: (value) {
-                      if (value == '123') {
-                        return '123 is weak';
-                      }
-                      return null;
+                      return AppValidators.passwordValidator(value);
                     },
                     isPassword: true,
                   ),
@@ -126,10 +140,17 @@ class _SigninScreenState extends State<SigninScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                       ),
-                      child: const SubTitleTextWidget(
-                        lable: 'Login',
-                      ),
-                      onPressed: () async {},
+                      child: (isLoading)
+                          ? const CircularProgressIndicator()
+                          : const SubTitleTextWidget(
+                              lable: 'log in',
+                            ),
+                      onPressed: () async {
+                        _signIn(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -148,24 +169,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       GuestButton(),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SubTitleTextWidget(
-                        lable: "Don't have an account?",
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(SignupScreen.pageRoute);
-                        },
-                        child: const SubTitleTextWidget(
-                          lable: 'Sign up',
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ],
-                  ),
+                  const _GoT0SignUp(),
                 ],
               ),
             ),
@@ -176,5 +180,27 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 }
 
-//
+class _GoT0SignUp extends StatelessWidget {
+  const _GoT0SignUp();
 
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SubTitleTextWidget(
+          lable: "Don't have an account?",
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(SignupScreen.pageRoute);
+          },
+          child: const SubTitleTextWidget(
+            lable: 'Sign up',
+            color: Colors.blue,
+          ),
+        ),
+      ],
+    );
+  }
+}

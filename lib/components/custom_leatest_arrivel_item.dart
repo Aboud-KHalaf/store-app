@@ -42,26 +42,28 @@ class CustomLeatestArrivalWidget extends StatelessWidget {
             const SizedBox(width: 5),
             Flexible(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SubTitleTextWidget(
                     lable: productItem.productTitle,
                     maxLines: 2,
-                    fontSize: 16,
+                    fontSize: 14,
                   ),
                   FittedBox(
                     child: Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        LikeButtonWidget(
+                          productId: productItem.productId,
+                        ),
                         IconButton(
+                          padding: EdgeInsets.zero,
                           onPressed: () {},
                           icon: const Icon(
                             Icons.shopping_cart_checkout_outlined,
+                            size: 22,
                           ),
-                        ),
-                        LikeButtonWidget(
-                          productId: productItem.productId,
                         ),
                       ],
                     ),
@@ -69,7 +71,7 @@ class CustomLeatestArrivalWidget extends StatelessWidget {
                   SubTitleTextWidget(
                     lable: '${productItem.productPrice} \$',
                     color: Colors.blue,
-                    fontSize: 14,
+                    fontSize: 12,
                   ),
                 ],
               ),

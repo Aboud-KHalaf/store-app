@@ -14,10 +14,10 @@ class CustomCategoryItem extends StatelessWidget {
       children: [
         Image.asset(
           image,
-          height: 55,
-          width: 55,
+          height: 45,
+          width: 45,
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 3),
         Text(text),
       ],
     );

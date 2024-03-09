@@ -59,9 +59,10 @@ class CartScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(
-                      bottom: (index == cartProvider.getCartItems.length - 1)
-                          ? 55
-                          : 0),
+                    bottom: (index == cartProvider.getCartItems.length - 1)
+                        ? 55
+                        : 0,
+                  ),
                   child: CustomCartWidget(
                     cartModel: cartList[index],
                   ),

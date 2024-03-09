@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_list_tile.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
+import 'package:store_app/providers/auth_provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/screens/auth/signin_screen.dart';
 import 'package:store_app/screens/inner/all_orders_screen.dart';
@@ -18,9 +19,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ThemeProvider>(context);
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    bool isUserLogedIn = authProvider.checkIfUserLogedIn();
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarRowWidget(text: 'elc store'),
+        title: const AppBarRowWidget(text: 'your profile'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -44,8 +47,9 @@ class ProfileScreen extends StatelessWidget {
                     radius: 27,
                     backgroundColor: Colors.amber,
                     child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage(AppImages.imagesProfileRecent),
+                      backgroundImage: AssetImage(
+                        AppImages.imagesProfileRecent,
+                      ),
                       radius: 25,
                     ),
                   ),
@@ -112,34 +116,38 @@ class ProfileScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         elevation: 8,
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
                             Icons.exit_to_app_outlined,
-                            color: Colors.red,
+                            color: (!isUserLogedIn) ? Colors.green : Colors.red,
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           SubTitleTextWidget(
-                            lable: 'Sign out',
-                            color: Colors.red,
+                            lable: (!isUserLogedIn) ? 'Login' : 'Logout',
+                            color: (!isUserLogedIn) ? Colors.green : Colors.red,
                           ),
                         ],
                       ),
                       onPressed: () async {
-                        await AppMethods.showErrorOrWaringDialog(
-                          context: context,
-                          subTitle: 'You will sign out',
-                          image: AppImages.imagesWarning,
-                          fcn: () {
-                            Navigator.of(context)
+                        (isUserLogedIn)
+                            ? await AppMethods.showErrorOrWaringDialog(
+                                context: context,
+                                subTitle: 'You will sign out',
+                                image: AppImages.imagesWarning,
+                                fcn: () {
+                                  authProvider.signOut();
+                                  Navigator.of(context).pushReplacementNamed(
+                                      SigninScreen.pageRoute);
+                                },
+                              )
+                            : Navigator.of(context)
                                 .pushReplacementNamed(SigninScreen.pageRoute);
-                          },
-                        );
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

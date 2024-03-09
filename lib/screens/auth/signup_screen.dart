@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_text_form_field.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
+import 'package:store_app/helpers/app_validator.dart';
+import 'package:store_app/providers/auth_provider.dart';
+import 'package:store_app/root_screen.dart';
 import 'package:store_app/widgets/app_title_widget.dart';
 import 'package:store_app/widgets/pick_image_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
@@ -27,6 +31,7 @@ class _SignupScreenState extends State<SignupScreen> {
   late final FocusNode _confirmPasswordFocusNode;
   final _formKey = GlobalKey<FormState>();
   XFile? pickedImage;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -74,6 +79,31 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  Future<void> _signUp(
+      {required String email, required String password}) async {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+    if (isValid) {
+      setState(() {
+        isLoading = true;
+      });
+      var res = await Provider.of<AuthProvider>(context, listen: false)
+          .signUp(email, password);
+      res.fold(
+          (l) => ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(l))), (r) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Successful sign up')));
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
+        }
+      });
+      setState(() {
+        isLoading = false;
+      });
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -119,10 +149,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _nameController,
                     focusNode: _nameFocusNode,
                     hintText: 'Full name',
-                    validator: (p0) {
-                      return null;
+                    validator: (value) {
+                      return AppValidators.displayNamevalidator(value);
                     },
-                    onFieldSubmitted: (p0) {},
+                    onFieldSubmitted: (value) {},
                     icon: Icons.person,
                   ),
                   const SizedBox(height: 10),
@@ -130,10 +160,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _emailController,
                     focusNode: _emailFocusNode,
                     hintText: 'Email Address',
-                    validator: (p0) {
-                      return null;
+                    validator: (value) {
+                      return AppValidators.emailValidator(value);
                     },
-                    onFieldSubmitted: (p0) {},
+                    onFieldSubmitted: (value) {},
                     icon: Icons.email,
                   ),
                   const SizedBox(height: 10),
@@ -141,10 +171,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     hintText: 'password',
-                    validator: (p0) {
-                      return null;
+                    validator: (value) {
+                      return AppValidators.passwordValidator(value);
                     },
-                    onFieldSubmitted: (p0) {
+                    onFieldSubmitted: (value) {
                       return;
                     },
                     icon: Icons.password,
@@ -154,10 +184,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
                     hintText: 'Confirm password',
-                    validator: (p0) {
-                      return null;
+                    validator: (value) {
+                      return AppValidators.repeatPasswordValidator();
                     },
-                    onFieldSubmitted: (p0) {},
+                    onFieldSubmitted: (value) {},
                     icon: Icons.password_outlined,
                   ),
                   const SizedBox(height: 20),
@@ -168,35 +198,51 @@ class _SignupScreenState extends State<SignupScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                       ),
-                      child: const SubTitleTextWidget(
-                        lable: 'Sign up',
-                      ),
-                      onPressed: () async {},
+                      child: (isLoading)
+                          ? const CircularProgressIndicator()
+                          : const SubTitleTextWidget(
+                              lable: 'Sign up',
+                            ),
+                      onPressed: () async {
+                        _signUp(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        );
+                      },
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SubTitleTextWidget(
-                        lable: "already have an account?",
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const SubTitleTextWidget(
-                          lable: 'login',
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ],
-                  ),
+                  const _GoToSignIn(),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _GoToSignIn extends StatelessWidget {
+  const _GoToSignIn();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SubTitleTextWidget(
+          lable: "already have an account?",
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const SubTitleTextWidget(
+            lable: 'login',
+            color: Colors.blue,
+          ),
+        ),
+      ],
     );
   }
 }
