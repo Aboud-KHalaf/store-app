@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:602390345799:android:29b19c1765072e3ff49962",
+        "mobilesdk_app_id": "1:602390345799:android:3eb8425b0a4ee384f49962",
         "android_client_info": {
-          "package_name": "com.example.store_app"
+          "package_name": "com.example.store_admin_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "602390345799-qbn67arnsfl7d4koues258ansmr83ibl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCnVAnacq3y554CXXpJVItXJM9JDkUpKxY"
@@ -20,7 +25,55 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602390345799-qbn67arnsfl7d4koues258ansmr83ibl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "602390345799-1pf34b1e6car8iq040v7u3rdrmj0f8nq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.storeApp.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602390345799:android:29b19c1765072e3ff49962",
+        "android_client_info": {
+          "package_name": "com.example.store_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602390345799-qbn67arnsfl7d4koues258ansmr83ibl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnVAnacq3y554CXXpJVItXJM9JDkUpKxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602390345799-qbn67arnsfl7d4koues258ansmr83ibl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "602390345799-1pf34b1e6car8iq040v7u3rdrmj0f8nq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.storeApp.RunnerTests"
+              }
+            }
+          ]
         }
       }
     }
