@@ -31,49 +31,48 @@ class CustomLeatestArrivalWidget extends StatelessWidget {
             Flexible(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Hero(
-                  tag: productItem.productId,
-                  child: FancyShimmerImage(
-                    imageUrl: productItem.productImage,
-                  ),
+                child: FancyShimmerImage(
+                  imageUrl: productItem.productImage,
                 ),
               ),
             ),
             const SizedBox(width: 5),
             Flexible(
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SubTitleTextWidget(
-                    lable: productItem.productTitle,
-                    maxLines: 2,
-                    fontSize: 14,
-                  ),
-                  FittedBox(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        LikeButtonWidget(
-                          productId: productItem.productId,
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.shopping_cart_checkout_outlined,
-                            size: 22,
-                          ),
-                        ),
-                      ],
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SubTitleTextWidget(
+                      lable: productItem.productTitle,
+                      maxLines: 2,
+                      fontSize: 14,
                     ),
-                  ),
-                  SubTitleTextWidget(
-                    lable: '${productItem.productPrice} \$',
-                    color: Colors.blue,
-                    fontSize: 12,
-                  ),
-                ],
+                    FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          LikeButtonWidget(
+                            productId: productItem.productId,
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.shopping_cart_checkout_outlined,
+                              size: 22,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SubTitleTextWidget(
+                      lable: '${productItem.productPrice} \$',
+                      color: Colors.blue,
+                      fontSize: 12,
+                    ),
+                  ],
+                ),
               ),
             )
           ],

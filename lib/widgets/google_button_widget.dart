@@ -4,15 +4,20 @@ import 'package:store_app/providers/auth_provider.dart';
 import 'package:store_app/root_screen.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
-class GoogleButton extends StatelessWidget {
+class GoogleButton extends StatefulWidget {
   const GoogleButton({
     super.key,
   });
 
   @override
+  State<GoogleButton> createState() => _GoogleButtonState();
+}
+
+class _GoogleButtonState extends State<GoogleButton> {
+  @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider =
-        Provider.of<AuthProvider>(context, listen: false);
+    MyAuthProvider authProvider =
+        Provider.of<MyAuthProvider>(context, listen: false);
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(

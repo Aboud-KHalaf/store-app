@@ -6,6 +6,7 @@ import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/leatest_arrivel_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
+import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/providers/wishList_provider.dart';
 import 'package:store_app/screens/auth/forget_password_screen.dart';
 import 'package:store_app/screens/auth/signin_screen.dart';
@@ -37,7 +38,10 @@ class AppListsAndMaps {
       create: (_) => ViewedRecentProider(),
     ),
     ChangeNotifierProvider(
-      create: (_) => AuthProvider(),
+      create: (_) => MyAuthProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => UserProvider(),
     ),
   ];
 

@@ -55,13 +55,14 @@ class _SigninScreenState extends State<SigninScreen> {
       setState(() {
         isLoading = true;
       });
-      var res = await Provider.of<AuthProvider>(context, listen: false)
+      var res = await Provider.of<MyAuthProvider>(context, listen: false)
           .signIn(email, password);
       res.fold(
           (l) => ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(l))), (r) {
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('Successful signIn')));
+
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
         }

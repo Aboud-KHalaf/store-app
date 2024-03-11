@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -5,7 +7,9 @@ import 'package:store_app/components/custom_text_form_field.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/helpers/app_validator.dart';
+import 'package:store_app/models/user_model.dart';
 import 'package:store_app/providers/auth_provider.dart';
+import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/root_screen.dart';
 import 'package:store_app/widgets/app_title_widget.dart';
 import 'package:store_app/widgets/pick_image_widget.dart';
@@ -87,13 +91,23 @@ class _SignupScreenState extends State<SignupScreen> {
       setState(() {
         isLoading = true;
       });
-      var res = await Provider.of<AuthProvider>(context, listen: false)
+      var res = await Provider.of<MyAuthProvider>(context, listen: false)
           .signUp(email, password);
       res.fold(
           (l) => ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(l))), (r) {
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('Successful sign up')));
+        Provider.of<UserProvider>(context, listen: false).setUserInfo(
+            userInfo: UserModel(
+                userName: _nameController.text,
+                createdAt: Timestamp.now(),
+                userId: FirebaseAuth.instance.currentUser!.uid,
+                userImage: '1',
+                userEmail: _emailController.text,
+                userCart: [],
+                userWish: []));
+
         if (mounted) {
           Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
         }

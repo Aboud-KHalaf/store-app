@@ -4,7 +4,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email', // Request the user's email address
+      'https://www.googleapis.com/auth/contacts.readonly', // Example scope for contacts access (adjust as needed)
+    ],
+  );
 
   // Sign Up with email and password
   Future<Either<String, UserCredential>> signUp(
@@ -60,7 +65,10 @@ class AuthService {
     // Trigger the Google sign-in flow
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
+    //print('strp1 .......... ');
+
     if (googleUser != null) {
+      //print("goooogle : google user not null .... ");
       // Get Google authentication credentials
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;

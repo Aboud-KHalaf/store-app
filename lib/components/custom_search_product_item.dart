@@ -38,13 +38,10 @@ class CustomSearchProductItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Hero(
-                tag: productItem.productId,
-                child: FancyShimmerImage(
-                  imageUrl: productItem.productImage,
-                  height: size.height * 0.22,
-                  width: double.infinity,
-                ),
+              child: FancyShimmerImage(
+                imageUrl: productItem.productImage,
+                height: size.height * 0.22,
+                width: double.infinity,
               ),
             ),
             Row(

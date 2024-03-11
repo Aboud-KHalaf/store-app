@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/services/auth_services.dart';
 
-class AuthProvider extends ChangeNotifier {
+class MyAuthProvider extends ChangeNotifier {
   User? _user;
   final AuthService _authService = AuthService();
 
@@ -16,7 +16,7 @@ class AuthProvider extends ChangeNotifier {
     return true;
   }
 
-  AuthProvider() {
+  MyAuthProvider() {
     _authService.currentUserStream.listen((user) {
       _user = user;
       notifyListeners();
