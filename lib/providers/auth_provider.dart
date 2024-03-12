@@ -23,10 +23,19 @@ class MyAuthProvider extends ChangeNotifier {
     });
   }
 
-  Future<Either<String, UserCredential>> signUp(
-      String email, String password) async {
+  Future<({bool isSuccess, String errMess})> signUp(
+      {required String email, required String password}) async {
     final credential = await _authService.signUp(email, password);
-    return credential;
+    late bool res;
+    late String errMessage;
+    credential.fold((l) {
+      errMessage = l;
+      res = false;
+    }, (r) {
+      errMessage = "";
+      res = true;
+    });
+    return (isSuccess: res, errMess: errMessage);
   }
 
   Future<Either<String, UserCredential>> signIn(

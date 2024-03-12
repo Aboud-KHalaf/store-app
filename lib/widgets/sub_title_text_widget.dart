@@ -25,6 +25,7 @@ class SubTitleTextWidget extends StatelessWidget {
     return Text(
       lable,
       maxLines: maxLines,
+      textAlign: TextAlign.center,
       style: TextStyle(
         color: color,
         fontSize: fontSize,

@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
 abstract class AppMethods {
+  static void showSnakBar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        showCloseIcon: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        content: Text(text),
+      ),
+    );
+  }
+
   static Future<void> showErrorOrWaringDialog({
     required BuildContext context,
     required String subTitle,
@@ -18,6 +29,8 @@ abstract class AppMethods {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(
@@ -31,22 +44,26 @@ abstract class AppMethods {
                 ),
                 const SizedBox(height: 10),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: (!isError)
+                      ? MainAxisAlignment.center
+                      : MainAxisAlignment.spaceEvenly,
                   children: [
-                    Visibility(
-                      visible: isError,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const SubTitleTextWidget(
-                          lable: 'cancle',
-                          color: Colors.red,
-                        ),
-                      ),
-                    ),
+                    (isError)
+                        ? TextButton(
+                            style:
+                                TextButton.styleFrom(padding: EdgeInsets.zero),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const SubTitleTextWidget(
+                              lable: 'cancle',
+                              color: Colors.red,
+                            ),
+                          )
+                        : const SizedBox(),
                     TextButton(
                       onPressed: fcn,
+                      style: TextButton.styleFrom(padding: EdgeInsets.zero),
                       child: const SubTitleTextWidget(
                         lable: 'ok',
                         color: Colors.green,

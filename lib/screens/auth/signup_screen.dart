@@ -1,13 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_text_form_field.dart';
+import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/helpers/app_validator.dart';
-import 'package:store_app/models/user_model.dart';
 import 'package:store_app/providers/auth_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/root_screen.dart';
@@ -25,17 +23,20 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  late final TextEditingController _emailController;
-  late final TextEditingController _passwordController;
-  late final TextEditingController _nameController;
-  late final TextEditingController _confirmPasswordController;
-  late final FocusNode _emailFocusNode;
-  late final FocusNode _passwordFocusNode;
-  late final FocusNode _nameFocusNode;
-  late final FocusNode _confirmPasswordFocusNode;
+  late final TextEditingController _emailController,
+      _passwordController,
+      _nameController,
+      _confirmPasswordController;
+
+  late final FocusNode _emailFocusNode,
+      _passwordFocusNode,
+      _nameFocusNode,
+      _confirmPasswordFocusNode;
+
   final _formKey = GlobalKey<FormState>();
   XFile? pickedImage;
   bool isLoading = false;
+  String? userImage;
 
   @override
   void initState() {
@@ -88,35 +89,65 @@ class _SignupScreenState extends State<SignupScreen> {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
     if (isValid) {
-      setState(() {
-        isLoading = true;
-      });
-      var res = await Provider.of<MyAuthProvider>(context, listen: false)
-          .signUp(email, password);
-      res.fold(
-          (l) => ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(l))), (r) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Successful sign up')));
-        Provider.of<UserProvider>(context, listen: false).setUserInfo(
-            userInfo: UserModel(
-                userName: _nameController.text,
-                createdAt: Timestamp.now(),
-                userId: FirebaseAuth.instance.currentUser!.uid,
-                userImage: '1',
-                userEmail: _emailController.text,
-                userCart: [],
-                userWish: []));
-
-        if (mounted) {
-          Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
-        }
-      });
-      setState(() {
-        isLoading = false;
-      });
-    } else {}
+      if (pickedImage == null) {
+        AppMethods.showErrorOrWaringDialog(
+            context: context,
+            subTitle: 'Make sure to pick up an image',
+            image: AppImages.imagesWarning,
+            isError: true,
+            fcn: () {
+              Navigator.of(context).pop();
+            });
+      } else {
+        setState(() {
+          isLoading = true;
+        });
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
+          {
+            var signUpRes =
+                await Provider.of<MyAuthProvider>(context, listen: false)
+                    .signUp(email: email, password: password);
+            (signUpRes.isSuccess == true)
+                ? {
+                    if (mounted)
+                      {
+                        AppMethods.showSnakBar(
+                            context, 'Your have been logged in successfully'),
+                        userImage = await Provider.of<UserProvider>(context,
+                                listen: false)
+                            .uploadImage(
+                          imageFilePath: pickedImage!.path,
+                          email: email,
+                        ),
+                        if (mounted)
+                          Provider.of<UserProvider>(context, listen: false)
+                              .setUserInfo(
+                            email: email,
+                            fullName: _nameController.text,
+                            userImageUrl: userImage!,
+                          ),
+                        if (mounted)
+                          Navigator.of(context)
+                              .pushReplacementNamed(RootScreen.routeName),
+                      }
+                  }
+                : {
+                    if (mounted)
+                      AppMethods.showSnakBar(context, signUpRes.errMess)
+                  };
+          }
+        });
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
   }
+
+  ////////////////////
+  ///
+  ///
+  ///
 
   @override
   Widget build(BuildContext context) {

@@ -67,12 +67,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
                           children: [
-                            const CircleAvatar(
+                            CircleAvatar(
                               radius: 27,
-                              backgroundColor: Colors.amber,
+                              backgroundColor: Colors.purple,
                               child: CircleAvatar(
-                                backgroundImage: AssetImage(
-                                  AppImages.imagesProfileRecent,
+                                backgroundImage: NetworkImage(
+                                  user.userImage,
                                 ),
                                 radius: 25,
                               ),
