@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:store_app/models/product_model.dart';
+import 'package:store_app/services/product_services.dart';
 
 class ProductProvider with ChangeNotifier {
-  final List<ProductModel> _products = ProductModel.localProds;
+  List<ProductModel> _products = [];
   List<ProductModel> get getProductList => _products;
+  final ProductsService _productsService = ProductsService();
+
+  Future<void> getProductsFuture() async {
+    _products = await _productsService.getFutureProducts();
+    notifyListeners();
+  }
 
   ProductModel findByProductId(String prodtId) {
-    // if (_products.where((element) => element.productId == prodtId).isEmpty) {
-    //   return null;
-    // }
     return _products.firstWhere((element) => element.productId == prodtId);
   }
 

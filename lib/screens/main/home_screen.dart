@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_category_item.dart';
-import 'package:store_app/components/custom_leatest_arrivel_item.dart';
 import 'package:store_app/components/custom_swiper_widget.dart';
 import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/models/caterogy_model.dart';
-import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/screens/main/search_screen.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
+import 'package:store_app/widgets/leatest_arrival_list.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 
@@ -16,9 +14,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final ProductProvider productProvider =
-        Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const AppBarRowWidget(
@@ -39,21 +34,7 @@ class HomeScreen extends StatelessWidget {
                 fontSize: 24,
               ),
               const SizedBox(height: 15),
-              SizedBox(
-                height: size.height * 0.16,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 15,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CustomLeatestArrivalWidget(
-                        productItem: productProvider.getProductList[index],
-                      ),
-                    );
-                  },
-                ),
-              ),
+              const LeatestArrivalListViewWidget(),
               const SizedBox(height: 15),
               const SubTitleTextWidget(
                 lable: 'Categories',

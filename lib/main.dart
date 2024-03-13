@@ -6,6 +6,7 @@ import 'package:store_app/helpers/app_lists_and_maps.dart';
 import 'package:store_app/helpers/app_theme.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/root_screen.dart';
+import 'package:store_app/screens/main/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
               isDarkTheme: themeProvider.darkTheme,
               context: context,
             ),
-            home: const RootScreen(),
+            home: const SplashScreen(),
             routes: AppListsAndMaps.routes,
           );
         },

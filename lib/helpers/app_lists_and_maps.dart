@@ -26,7 +26,7 @@ class AppListsAndMaps {
       create: (_) => ThemeProvider(),
     ),
     ChangeNotifierProvider(
-      create: (_) => ProductProvider(),
+      create: (_) => ProductProvider()..getProductsFuture(),
     ),
     ChangeNotifierProvider(
       create: (_) => CartProvider(),

@@ -40,51 +40,55 @@ class _SearchScreenState extends State<SearchScreen> {
         ? productProvider.getProductList
         : productProvider.findByCategory(ctgName: productCategory);
 
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        appBar: AppBar(title: const AppBarRowWidget(text: 'Search')),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              CustomTextField(
-                onChanged: (s) {
-                  setState(() {
-                    searchProductList = productProvider.searchQuery(
-                        searchTxt: s, searchProduct: productList);
-                  });
-                },
-                onSubmitted: (s) {
-                  setState(() {
-                    searchProductList = productProvider.searchQuery(
-                        searchTxt: s, searchProduct: productList);
-                  });
-                },
-                controller: textEditingController,
-              ),
-              const SizedBox(height: 8),
-              (textEditingController.text.isNotEmpty &&
-                      searchProductList.isEmpty)
-                  ? const Text('No results ...')
-                  : Expanded(
-                      child: DynamicHeightGridView(
-                        itemCount: searchProductList.isEmpty
-                            ? productList.length
-                            : searchProductList.length,
-                        crossAxisCount: 2,
-                        builder: (context, index) {
-                          return CustomSearchProductItem(
-                            productItem: searchProductList.isEmpty
-                                ? productList[index]
-                                : searchProductList[index],
-                          );
-                        },
+    return RefreshIndicator(
+      onRefresh: () => productProvider.getProductsFuture(),
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          appBar:
+              AppBar(title: AppBarRowWidget(text: productCategory ?? 'Search')),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                CustomTextField(
+                  onChanged: (s) {
+                    setState(() {
+                      searchProductList = productProvider.searchQuery(
+                          searchTxt: s, searchProduct: productList);
+                    });
+                  },
+                  onSubmitted: (s) {
+                    setState(() {
+                      searchProductList = productProvider.searchQuery(
+                          searchTxt: s, searchProduct: productList);
+                    });
+                  },
+                  controller: textEditingController,
+                ),
+                const SizedBox(height: 8),
+                (textEditingController.text.isNotEmpty &&
+                        searchProductList.isEmpty)
+                    ? const Text('No results ...')
+                    : Expanded(
+                        child: DynamicHeightGridView(
+                          itemCount: searchProductList.isEmpty
+                              ? productList.length
+                              : searchProductList.length,
+                          crossAxisCount: 2,
+                          builder: (context, index) {
+                            return CustomSearchProductItem(
+                              productItem: searchProductList.isEmpty
+                                  ? productList[index]
+                                  : searchProductList[index],
+                            );
+                          },
+                        ),
                       ),
-                    ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

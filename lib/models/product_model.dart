@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
 class ProductModel {
@@ -18,6 +19,19 @@ class ProductModel {
     required this.productImage,
     required this.productQuantity,
   });
+
+  factory ProductModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> snapshot) {
+    return ProductModel(
+      productId: snapshot.id,
+      productTitle: snapshot.get('productTitle'),
+      productDescription: snapshot.get('productDescription'),
+      productCategory: snapshot.get('productCategory'),
+      productImage: snapshot.get('productImage'),
+      productPrice: snapshot.get('productPrice'), // Parse price to double
+      productQuantity: snapshot.get('productQuantity'),
+    );
+  }
 
   static List<ProductModel> localProds = [
     // Phones
