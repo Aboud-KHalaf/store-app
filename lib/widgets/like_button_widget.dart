@@ -28,7 +28,8 @@ class LikeButtonWidget extends StatelessWidget {
         return IconButton(
           padding: EdgeInsets.zero,
           onPressed: () {
-            wishListProvider.addOrRemoveProductToWishList(productId: productId);
+            wishListProvider.addToWishlistFirebase(
+                productId: productId, context: context);
           },
           icon: Icon(
             !isLiked ? IconlyLight.heart : IconlyBold.heart,

@@ -68,7 +68,11 @@ class CustomCartWidget extends StatelessWidget {
                                 onPressed: () {
                                   Provider.of<CartProvider>(context,
                                           listen: false)
-                                      .removeCartItem(productId: prodtId);
+                                      .removeCartItemFromFirebase(
+                                    productId: prodtId,
+                                    cartId: cartModel.cartId,
+                                    qty: cartModel.quantity,
+                                  );
                                 },
                                 icon: const Icon(
                                   Icons.clear,

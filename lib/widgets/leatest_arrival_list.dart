@@ -17,7 +17,12 @@ class LeatestArrivalListViewWidget extends StatelessWidget {
       child: Consumer<ProductProvider>(
         builder: (context, productProvider, child) {
           if (productProvider.getProductList.isEmpty) {
-            return const CircularProgressIndicator();
+            return const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            );
           } else {
             final products = productProvider.getProductList;
             return ListView.builder(

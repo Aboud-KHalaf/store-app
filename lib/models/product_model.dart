@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uuid/uuid.dart';
 
 class ProductModel {
   final String productId,
@@ -29,8 +28,10 @@ class ProductModel {
       productDescription: snapshot.get('productDescription'),
       productCategory: snapshot.get('productCategory'),
       productImage: snapshot.get('productImage'),
-      productPrice: snapshot.get('productPrice'), // Parse price to double
-      productQuantity: snapshot.get('productQuantity'),
+      productPrice: snapshot.get('productPrice'),
+      productQuantity: snapshot.get(
+        'productQuantity',
+      ),
     );
   }
 }

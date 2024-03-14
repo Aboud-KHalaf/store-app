@@ -1,4 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:store_app/helpers/app_collections.dart';
+import 'package:store_app/helpers/app_firestore_columns.dart';
+import 'package:store_app/helpers/app_images.dart';
+import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/models/cart_model.dart';
 import 'package:store_app/models/product_model.dart';
 import 'package:store_app/providers/product_provider.dart';
@@ -59,5 +65,108 @@ class CartProvider with ChangeNotifier {
       q += value.quantity;
     });
     return (total, q);
+  }
+
+  // firebase
+
+  // Firebase
+  final usersDB = FirebaseFirestore.instance.collection("users");
+  final _auth = FirebaseAuth.instance;
+  Future<void> addToCartFirebase(
+      {required String productId,
+      required int qty,
+      required BuildContext context}) async {
+    final User? user = _auth.currentUser;
+    if (user == null) {
+      AppMethods.showErrorOrWaringDialog(
+          context: context,
+          subTitle: 'Log in first',
+          image: AppImages.imagesError,
+          fcn: () {
+            Navigator.pop(context);
+          });
+      return;
+    }
+    final uid = user.uid;
+    final cartId = const Uuid().v4();
+    try {
+      usersDB.doc(uid).update({
+        'userCart': FieldValue.arrayUnion([
+          {
+            "cartId": cartId,
+            'productId': productId,
+            'quantity': qty,
+          }
+        ])
+      });
+      await fetchCart();
+      AppMethods.showSnakBar(context, "Item has been added to cart");
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> fetchCart() async {
+    User? user = _auth.currentUser;
+    if (user == null) {
+      debugPrint("the function has been called and the user is null");
+      _cartItems.clear();
+      return;
+    }
+    try {
+      final userDoc = await usersDB.doc(user.uid).get();
+      final data = userDoc.data();
+      if (data == null || !data.containsKey("userCart")) {
+        return;
+      }
+      final leng = userDoc.get("userCart").length;
+      for (int index = 0; index < leng; index++) {
+        _cartItems.putIfAbsent(
+          userDoc.get('userCart')[index]['productId'],
+          () => CartModel(
+            cartId: userDoc.get('userCart')[index]['cartId'],
+            productId: userDoc.get('userCart')[index]['productId'],
+            quantity: userDoc.get('userCart')[index]['quantity'],
+          ),
+        );
+      }
+    } catch (e) {
+      rethrow;
+    }
+    notifyListeners();
+  }
+
+  Future<void> removeCartItemFromFirebase(
+      {required String cartId,
+      required String productId,
+      required int qty}) async {
+    User? user = _auth.currentUser;
+    try {
+      await usersDB.doc(user!.uid).update({
+        "userCart": FieldValue.arrayRemove([
+          {
+            "cartId": cartId,
+            'productId': productId,
+            'quantity': qty,
+          }
+        ])
+      });
+      _cartItems.remove(productId);
+      await fetchCart();
+    } catch (e) {
+      rethrow;
+    }
+    notifyListeners();
+  }
+
+  Future<void> clearCartFromFirebase() async {
+    User? user = _auth.currentUser;
+    try {
+      await usersDB.doc(user!.uid).update({"userCart": []});
+      _cartItems.clear();
+    } catch (e) {
+      rethrow;
+    }
+    notifyListeners();
   }
 }

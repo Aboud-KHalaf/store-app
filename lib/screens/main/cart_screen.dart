@@ -41,7 +41,7 @@ class CartScreen extends StatelessWidget {
                       subTitle: 'Do you realy want to clear your cart ?',
                       image: AppImages.imagesWarning,
                       fcn: () {
-                        cartProvider.clearCartMap();
+                        cartProvider.clearCartFromFirebase();
                         Navigator.pop(context);
                       },
                       isError: true,

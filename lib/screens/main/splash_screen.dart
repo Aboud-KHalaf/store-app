@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/helpers/app_images.dart';
+import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
+import 'package:store_app/providers/user_provider.dart';
+import 'package:store_app/providers/wishList_provider.dart';
 import 'package:store_app/root_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,15 +23,49 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
+  bool isLoadingProds = false;
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final productProvider =
-          Provider.of<ProductProvider>(context, listen: false);
-      await productProvider.getProductsFuture();
+      await fetchFCT();
     });
     _navigateToRoot();
     super.initState();
+  }
+
+  Future<void> fetchFCT() async {
+    final productsProvider =
+        Provider.of<ProductProvider>(context, listen: false);
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    final wishlistProvider =
+        Provider.of<WishListProvider>(context, listen: false);
+
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      Future.wait({
+        productsProvider.getProductsFuture(),
+      });
+      Future.wait({
+        cartProvider.fetchCart(),
+        // wishlistProvider.fetchWishlist(),
+      });
+    } catch (error) {
+      debugPrint(error.toString());
+    } finally {
+      setState(() {
+        isLoadingProds = false;
+      });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (isLoadingProds) {
+      fetchFCT();
+    }
+
+    super.didChangeDependencies();
   }
 
   @override

@@ -76,8 +76,10 @@ class CustomSearchProductItem extends StatelessWidget {
                     child: IconButton(
                       padding: EdgeInsets.zero,
                       onPressed: () {
-                        cartProvider.addProductToCart(
+                        cartProvider.addToCartFirebase(
                           productId: productItem.productId,
+                          qty: 1,
+                          context: context,
                         );
                       },
                       icon: Icon(
@@ -89,7 +91,7 @@ class CustomSearchProductItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             )
           ],

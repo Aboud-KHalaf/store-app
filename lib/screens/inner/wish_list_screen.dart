@@ -45,7 +45,7 @@ class WishListScreen extends StatelessWidget {
                       subTitle: 'Do you realy want to clear your wish list ?',
                       image: AppImages.imagesWarning,
                       fcn: () {
-                        wishListProvider.clearWishList();
+                        wishListProvider.clearWishlistFromFirebase();
                         Navigator.pop(context);
                       },
                       isError: true,
