@@ -6,7 +6,10 @@ class ProductsService {
   final String _productsCollection = 'products';
 
   Future<List<ProductModel>> getFutureProducts() async {
-    final snapshot = await _firestore.collection(_productsCollection).get();
+    final snapshot = await _firestore
+        .collection(_productsCollection)
+        .orderBy('createdAt', descending: false)
+        .get();
 
     return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
   }

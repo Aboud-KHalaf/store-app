@@ -5,7 +5,6 @@ import 'package:store_app/firebase_options.dart';
 import 'package:store_app/helpers/app_lists_and_maps.dart';
 import 'package:store_app/helpers/app_theme.dart';
 import 'package:store_app/providers/theme_provider.dart';
-import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/main/splash_screen.dart';
 
 void main() async {
