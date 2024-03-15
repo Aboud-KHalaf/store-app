@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
+import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/providers/wishList_provider.dart';
 import 'package:store_app/root_screen.dart';
 
@@ -39,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     final wishlistProvider =
         Provider.of<WishListProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context);
 
     try {
       Future.wait({
@@ -46,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
       Future.wait({
         cartProvider.fetchCart(),
+        userProvider.fetchUser(),
         wishlistProvider.fetchWishlist(),
       });
     } catch (error) {

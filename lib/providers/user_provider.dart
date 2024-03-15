@@ -36,7 +36,8 @@ class UserProvider with ChangeNotifier {
 
   UserModel? get user => _user;
 
-  Future<void> fetchUser(String userId) async {
+  Future<void> fetchUser() async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     try {
       final user = await _userService.getUserById(userId);
       _user = user;
