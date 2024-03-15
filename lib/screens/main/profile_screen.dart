@@ -15,23 +15,8 @@ import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
-      await userProvider.fetchUser(FirebaseAuth
-          .instance.currentUser!.uid); // Fetch user data on screen load
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

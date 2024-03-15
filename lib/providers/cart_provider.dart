@@ -1,18 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:store_app/helpers/app_collections.dart';
-import 'package:store_app/helpers/app_firestore_columns.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/models/cart_model.dart';
 import 'package:store_app/models/product_model.dart';
 import 'package:store_app/providers/product_provider.dart';
+import 'package:store_app/services/user_services.dart';
 import 'package:uuid/uuid.dart';
 
 class CartProvider with ChangeNotifier {
   final Map<String, CartModel> _cartItems = {};
   Map<String, CartModel> get getCartItems => _cartItems;
+  UserService userService = UserService();
 
   bool isProductInCart({required String productId}) {
     return _cartItems.containsKey(productId);
@@ -67,8 +67,6 @@ class CartProvider with ChangeNotifier {
     return (total, q);
   }
 
-  // firebase
-
   // Firebase
   final usersDB = FirebaseFirestore.instance.collection("users");
   final _auth = FirebaseAuth.instance;
@@ -87,19 +85,11 @@ class CartProvider with ChangeNotifier {
           });
       return;
     }
-    final uid = user.uid;
-    final cartId = const Uuid().v4();
+
     try {
-      usersDB.doc(uid).update({
-        'userCart': FieldValue.arrayUnion([
-          {
-            "cartId": cartId,
-            'productId': productId,
-            'quantity': qty,
-          }
-        ])
-      });
+      userService.addToCart(productId: productId, qty: qty, user: user);
       await fetchCart();
+      // ignore: use_build_context_synchronously
       AppMethods.showSnakBar(context, "Item has been added to cart");
     } catch (e) {
       rethrow;

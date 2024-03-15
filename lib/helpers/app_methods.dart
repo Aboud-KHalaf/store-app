@@ -5,10 +5,22 @@ abstract class AppMethods {
   static void showSnakBar(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
+        behavior: SnackBarBehavior.floating,
+        elevation: 24,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.purple),
+          borderRadius: BorderRadius.circular(16),
+        ),
         duration: const Duration(seconds: 3),
         showCloseIcon: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        content: Text(text),
+        content: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.purple,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

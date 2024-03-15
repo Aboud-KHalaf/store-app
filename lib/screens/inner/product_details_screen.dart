@@ -79,7 +79,8 @@ class ProductDetailsScreen extends StatelessWidget {
                           maximumSize: const Size(250, 50),
                         ),
                         onPressed: () {
-                          cartProvider.addProductToCart(productId: productId);
+                          cartProvider.addToCartFirebase(
+                              productId: productId, qty: 1, context: context);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

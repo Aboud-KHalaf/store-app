@@ -60,7 +60,12 @@ class CustomLeatestArrivalWidget extends StatelessWidget {
                           ),
                           IconButton(
                             padding: EdgeInsets.zero,
-                            onPressed: () {},
+                            onPressed: () {
+                              cartProvider.addToCartFirebase(
+                                  productId: productItem.productId,
+                                  qty: 1,
+                                  context: context);
+                            },
                             icon: Icon(
                               (cartProvider.isProductInCart(
                                       productId: productItem.productId))

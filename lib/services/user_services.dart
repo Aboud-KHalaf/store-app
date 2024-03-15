@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:store_app/helpers/app_collections.dart';
 import 'package:store_app/models/user_model.dart';
+import 'package:uuid/uuid.dart';
 
 class UserService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -34,5 +36,25 @@ class UserService {
         print('Error adding user data: $e');
       }
     }
+  }
+
+  final usersDB =
+      FirebaseFirestore.instance.collection(AppCollections.useresColl);
+  Future<void> addToCart({
+    required String productId,
+    required int qty,
+    required User user,
+  }) async {
+    final uid = user.uid;
+    final cartId = const Uuid().v4();
+    usersDB.doc(uid).update({
+      'userCart': FieldValue.arrayUnion([
+        {
+          "cartId": cartId,
+          'productId': productId,
+          'quantity': qty,
+        }
+      ])
+    });
   }
 }

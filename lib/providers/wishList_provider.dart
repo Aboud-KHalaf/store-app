@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
-import 'package:store_app/models/with_model.dart';
+import 'package:store_app/models/wishlist_model.dart';
 import 'package:uuid/uuid.dart';
 
 class WishListProvider with ChangeNotifier {
@@ -12,6 +12,13 @@ class WishListProvider with ChangeNotifier {
 
   bool isProductInWishList({required String productId}) {
     return _wishlistItems.containsKey(productId);
+  }
+
+  String findWishIdByProductId(String prodtId) {
+    WishModel v = _wishlistItems.values
+        .toList()
+        .firstWhere((element) => element.productId == prodtId);
+    return v.wishId;
   }
 
   void addOrRemoveProductToWishList({required String productId}) {
@@ -40,6 +47,9 @@ class WishListProvider with ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   Future<void> addToWishlistFirebase(
       {required String productId, required BuildContext context}) async {
+    if (isProductInWishList(productId: productId)) {
+      return;
+    }
     final User? user = _auth.currentUser;
     if (user == null) {
       AppMethods.showErrorOrWaringDialog(
@@ -62,7 +72,7 @@ class WishListProvider with ChangeNotifier {
           }
         ])
       });
-      // await fetchWishlist();
+      await fetchWishlist();
       AppMethods.showSnakBar(context, "Item has been added to Wishlist");
     } catch (e) {
       rethrow;
@@ -99,7 +109,6 @@ class WishListProvider with ChangeNotifier {
   }
 
   Future<void> removeWishlistItemFromFirebase({
-    required String wishlistId,
     required String productId,
   }) async {
     User? user = _auth.currentUser;
@@ -107,13 +116,13 @@ class WishListProvider with ChangeNotifier {
       await usersDB.doc(user!.uid).update({
         "userWish": FieldValue.arrayRemove([
           {
-            'wishlistId': wishlistId,
+            'wishlistId': findWishIdByProductId(productId),
             'productId': productId,
           }
         ])
       });
       _wishlistItems.remove(productId);
-      // await fetchWishlist();
+      await fetchWishlist();
     } catch (e) {
       rethrow;
     }
