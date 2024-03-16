@@ -8,7 +8,10 @@ import 'package:store_app/widgets/sub_title_text_widget.dart';
 class CustomCartButtomSheet extends StatelessWidget {
   const CustomCartButtomSheet({
     super.key,
+    required this.checkOutFcn,
   });
+
+  final Function checkOutFcn;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,9 @@ class CustomCartButtomSheet extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () async {
+                await checkOutFcn();
+              },
               color: Colors.cyan,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),

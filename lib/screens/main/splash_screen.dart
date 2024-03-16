@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     final wishlistProvider =
         Provider.of<WishListProvider>(context, listen: false);
-    final userProvider = Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
       Future.wait({
