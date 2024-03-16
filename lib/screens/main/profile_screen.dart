@@ -91,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                       title: 'All orders',
                       ontap: () {
                         Navigator.of(context)
-                            .pushNamed(AllOrdersScreen.pageRoute);
+                            .pushNamed(AllOrdersScreen.routeName);
                       },
                     ),
                   ),

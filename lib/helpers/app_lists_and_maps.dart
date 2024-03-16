@@ -4,6 +4,7 @@ import 'package:provider/single_child_widget.dart';
 import 'package:store_app/providers/auth_provider.dart';
 import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/leatest_arrivel_provider.dart';
+import 'package:store_app/providers/order_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
@@ -43,6 +44,9 @@ class AppListsAndMaps {
     ChangeNotifierProvider(
       create: (_) => UserProvider(),
     ),
+    ChangeNotifierProvider(
+      create: (_) => OrdersProvider(),
+    ),
   ];
 
   static List<Widget> screens = const [
@@ -60,7 +64,7 @@ class AppListsAndMaps {
     ViewedRecently.pageRoute: (context) => const ViewedRecently(),
     SigninScreen.pageRoute: (context) => const SigninScreen(),
     SignupScreen.pageRoute: (context) => const SignupScreen(),
-    AllOrdersScreen.pageRoute: (context) => const AllOrdersScreen(),
+    AllOrdersScreen.routeName: (context) => const AllOrdersScreen(),
     ForgetPassword.pageRoute: (context) => const ForgetPassword(),
     SearchScreen.pageRoute: (context) => const SearchScreen(),
   };
