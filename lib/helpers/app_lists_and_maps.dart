@@ -9,6 +9,7 @@ import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/providers/wishList_provider.dart';
+import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/auth/forget_password_screen.dart';
 import 'package:store_app/screens/auth/signin_screen.dart';
 import 'package:store_app/screens/auth/signup_screen.dart';
@@ -67,5 +68,6 @@ class AppListsAndMaps {
     AllOrdersScreen.routeName: (context) => const AllOrdersScreen(),
     ForgetPassword.pageRoute: (context) => const ForgetPassword(),
     SearchScreen.pageRoute: (context) => const SearchScreen(),
+    RootScreen.routeName: (context) => const RootScreen(),
   };
 }

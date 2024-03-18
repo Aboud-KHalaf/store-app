@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider with ChangeNotifier {
+  // ignore: constant_identifier_names
   static const THEME_KEY = "theme_key";
   bool darkTheme = false;
   bool get isDarkTheme => darkTheme;

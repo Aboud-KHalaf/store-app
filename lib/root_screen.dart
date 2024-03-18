@@ -5,7 +5,7 @@ import 'package:store_app/helpers/app_lists_and_maps.dart';
 import 'package:store_app/providers/cart_provider.dart';
 
 class RootScreen extends StatefulWidget {
-  static const String routeName = '/';
+  static const String routeName = '/r';
   const RootScreen({super.key});
 
   @override

@@ -10,6 +10,7 @@ import 'package:store_app/providers/auth_provider.dart';
 import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/auth/forget_password_screen.dart';
 import 'package:store_app/screens/auth/signup_screen.dart';
+import 'package:store_app/screens/main/splash_screen.dart';
 import 'package:store_app/widgets/app_title_widget.dart';
 import 'package:store_app/widgets/google_button_widget.dart';
 import 'package:store_app/widgets/guest_button_widget.dart';
@@ -70,7 +71,7 @@ class _SigninScreenState extends State<SigninScreen> {
           );
 
           if (mounted) {
-            Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
+            Navigator.of(context).pushReplacementNamed('/');
           }
         },
       );

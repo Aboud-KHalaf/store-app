@@ -38,7 +38,7 @@ class _CartScreenState extends State<CartScreen> {
 
     return cartList.isEmpty
         ? const CustomEmptyCartWidget(
-            image: AppImages.imagesBagShoppingBasket,
+            image: AppImages.imagesBagShoppingCart,
             title: AppTexts.woops,
             subTitile: AppTexts.emptyCart,
             text: AppTexts.goShoping,
@@ -46,9 +46,15 @@ class _CartScreenState extends State<CartScreen> {
           )
         : Scaffold(
             bottomSheet: (isLoading)
-                ? Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: LottieBuilder.asset(AppAnimations.loadingAnimation),
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LottieBuilder.asset(
+                        AppAnimations.loadingAnimation,
+                        width: 100,
+                        height: 100,
+                      ),
+                    ],
                   )
                 : CustomCartButtomSheet(
                     checkOutFcn: () async {

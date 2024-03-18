@@ -34,8 +34,11 @@ class CustomLeatestArrivalWidget extends StatelessWidget {
             Flexible(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: FancyShimmerImage(
-                  imageUrl: productItem.productImage,
+                child: Hero(
+                  tag: productItem.productImage,
+                  child: FancyShimmerImage(
+                    imageUrl: productItem.productImage,
+                  ),
                 ),
               ),
             ),

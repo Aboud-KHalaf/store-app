@@ -129,8 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             userImageUrl: userImage!,
                           ),
                         if (mounted)
-                          Navigator.of(context)
-                              .pushReplacementNamed(RootScreen.routeName),
+                          Navigator.of(context).pushReplacementNamed('/'),
                       }
                   }
                 : {

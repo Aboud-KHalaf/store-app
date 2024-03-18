@@ -41,10 +41,13 @@ class CustomCartWidget extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: FancyShimmerImage(
-                    imageUrl: productItem.productImage,
-                    height: size.height * 0.15,
-                    width: size.height * 0.15,
+                  child: Hero(
+                    tag: productItem.productImage,
+                    child: FancyShimmerImage(
+                      imageUrl: productItem.productImage,
+                      height: size.height * 0.15,
+                      width: size.height * 0.15,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 10.0),

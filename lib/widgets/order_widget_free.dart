@@ -22,10 +22,13 @@ class _OrdersWidgetFreeState extends State<OrdersWidgetFree> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: FancyShimmerImage(
-              height: size.width * 0.25,
-              width: size.width * 0.25,
-              imageUrl: widget.ordersModelAdvanced.imageUrl,
+            child: Hero(
+              tag: widget.ordersModelAdvanced.imageUrl,
+              child: FancyShimmerImage(
+                height: size.width * 0.25,
+                width: size.width * 0.25,
+                imageUrl: widget.ordersModelAdvanced.imageUrl,
+              ),
             ),
           ),
           Flexible(

@@ -32,11 +32,14 @@ class ProductDetailsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            FancyShimmerImage(
-              imageUrl: productItem.productImage,
-              height: size.height * 0.32,
-              width: double.infinity,
-              boxFit: BoxFit.contain,
+            Hero(
+              tag: productItem.productImage,
+              child: FancyShimmerImage(
+                imageUrl: productItem.productImage,
+                height: size.height * 0.32,
+                width: double.infinity,
+                boxFit: BoxFit.contain,
+              ),
             ),
             const SizedBox(height: 20),
             Padding(

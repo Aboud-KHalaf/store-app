@@ -47,8 +47,12 @@ class ProfileScreen extends StatelessWidget {
                     builder: (context, userProvider, child) {
                     if (userProvider.user == null) {
                       return Center(
-                          child: LottieBuilder.asset(
-                              AppAnimations.loadingAnimation));
+                        child: LottieBuilder.asset(
+                          AppAnimations.loadingAnimation,
+                          height: 150,
+                          width: 150,
+                        ),
+                      );
                     } else {
                       final user = userProvider.user!;
                       return Padding(
