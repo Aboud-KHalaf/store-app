@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/providers/auth_provider.dart';
 import 'package:store_app/root_screen.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
@@ -27,11 +28,15 @@ class _GoogleButtonState extends State<GoogleButton> {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
-      child: const Row(
+      child: Row(
         children: [
-          Icon(Icons.border_all),
-          //SizedBox(width: 5),
-          SubTitleTextWidget(
+          Image.asset(
+            AppImages.googleIcon,
+            width: 24,
+            height: 24,
+          ),
+          const SizedBox(width: 5),
+          const SubTitleTextWidget(
             lable: 'Sign in with google',
             color: Colors.blue,
           ),

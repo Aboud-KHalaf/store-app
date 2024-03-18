@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_text_form_field.dart';
+import 'package:store_app/helpers/app_animations.dart';
+import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/helpers/app_validator.dart';
 import 'package:store_app/providers/auth_provider.dart';
@@ -58,15 +61,19 @@ class _SigninScreenState extends State<SigninScreen> {
       var res = await Provider.of<MyAuthProvider>(context, listen: false)
           .signIn(email, password);
       res.fold(
-          (l) => ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(l))), (r) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text('Successful signIn')));
+        (l) => ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(l))),
+        (r) {
+          AppMethods.showSnakBar(
+            context,
+            "Your have been logged in successfully",
+          );
 
-        if (mounted) {
-          Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
-        }
-      });
+          if (mounted) {
+            Navigator.of(context).pushReplacementNamed(RootScreen.routeName);
+          }
+        },
+      );
       setState(() {
         isLoading = false;
       });
@@ -142,7 +149,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         backgroundColor: Colors.blue,
                       ),
                       child: (isLoading)
-                          ? const CircularProgressIndicator()
+                          ? LottieBuilder.asset(AppAnimations.loadingAnimation)
                           : const SubTitleTextWidget(
                               lable: 'log in',
                             ),

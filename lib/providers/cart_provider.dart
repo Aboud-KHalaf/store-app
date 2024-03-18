@@ -6,6 +6,7 @@ import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/models/cart_model.dart';
 import 'package:store_app/models/product_model.dart';
 import 'package:store_app/providers/product_provider.dart';
+import 'package:store_app/screens/auth/signin_screen.dart';
 import 'package:store_app/services/user_services.dart';
 import 'package:uuid/uuid.dart';
 
@@ -81,7 +82,7 @@ class CartProvider with ChangeNotifier {
           subTitle: 'Log in first',
           image: AppImages.imagesError,
           fcn: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, SigninScreen.pageRoute);
           });
       return;
     }

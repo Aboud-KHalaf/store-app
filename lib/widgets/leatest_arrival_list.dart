@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_leatest_arrivel_item.dart';
+import 'package:store_app/helpers/app_animations.dart';
 import 'package:store_app/providers/product_provider.dart';
 
 class LeatestArrivalListViewWidget extends StatelessWidget {
@@ -17,10 +19,10 @@ class LeatestArrivalListViewWidget extends StatelessWidget {
       child: Consumer<ProductProvider>(
         builder: (context, productProvider, child) {
           if (productProvider.getProductList.isEmpty) {
-            return const Row(
+            return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(),
+                LottieBuilder.asset(AppAnimations.loadingAnimation),
               ],
             );
           } else {

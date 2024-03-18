@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/models/wishlist_model.dart';
+import 'package:store_app/screens/auth/signin_screen.dart';
 import 'package:uuid/uuid.dart';
 
 class WishListProvider with ChangeNotifier {
@@ -57,7 +58,7 @@ class WishListProvider with ChangeNotifier {
           subTitle: 'Log in first',
           image: AppImages.imagesWarning,
           fcn: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, SigninScreen.pageRoute);
           });
       return;
     }

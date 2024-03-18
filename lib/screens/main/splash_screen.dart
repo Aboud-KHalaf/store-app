@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/helpers/app_animations.dart';
-import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/providers/wishList_provider.dart';
 import 'package:store_app/root_screen.dart';
-import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/shimmer_text_widget.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -35,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await fetchFCT();
     });
-    // _navigateToRoot();
+    _navigateToRoot();
     super.initState();
   }
 

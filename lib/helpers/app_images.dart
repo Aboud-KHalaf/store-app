@@ -141,4 +141,5 @@ class AppImages {
   /// Assets for imagesWarning
   /// assets/images/warning.png
   static const String imagesWarning = "assets/images/warning.png";
+  static const String googleIcon = "assets/images/google.png";
 }

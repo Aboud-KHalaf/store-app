@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/screens/main/search_screen.dart';
+import 'package:store_app/root_screen.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 
@@ -60,7 +60,7 @@ class CustomEmptyCartWidget extends StatelessWidget {
                 style: ElevatedButton.styleFrom(elevation: 8),
                 onPressed: () {
                   Navigator.of(context)
-                      .pushReplacementNamed(SearchScreen.pageRoute);
+                      .pushReplacementNamed(RootScreen.routeName);
                 },
                 child: SubTitleTextWidget(
                   lable: buttonText,

@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_cart_bottom_sheet.dart';
 import 'package:store_app/components/custom_cart_widget.dart';
 import 'package:store_app/components/custom_empty_cart_widget.dart';
+import 'package:store_app/helpers/app_animations.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
@@ -44,9 +46,9 @@ class _CartScreenState extends State<CartScreen> {
           )
         : Scaffold(
             bottomSheet: (isLoading)
-                ? const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: CircularProgressIndicator.adaptive(),
+                ? Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: LottieBuilder.asset(AppAnimations.loadingAnimation),
                   )
                 : CustomCartButtomSheet(
                     checkOutFcn: () async {

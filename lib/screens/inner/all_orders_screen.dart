@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_empty_cart_widget.dart';
+import 'package:store_app/helpers/app_animations.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/models/order_model.dart';
 import 'package:store_app/providers/order_provider.dart';
@@ -29,8 +31,8 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
           future: ordersProvider.fetchOrder(),
           builder: ((context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Center(
+                child: LottieBuilder.asset(AppAnimations.loadingAnimation),
               );
             } else if (snapshot.hasError) {
               return Center(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_list_tile.dart';
+import 'package:store_app/helpers/app_animations.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/providers/auth_provider.dart';
@@ -44,7 +46,9 @@ class ProfileScreen extends StatelessWidget {
                 ? Consumer<UserProvider>(
                     builder: (context, userProvider, child) {
                     if (userProvider.user == null) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                          child: LottieBuilder.asset(
+                              AppAnimations.loadingAnimation));
                     } else {
                       final user = userProvider.user!;
                       return Padding(

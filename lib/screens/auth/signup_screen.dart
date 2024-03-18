@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:store_app/components/custom_text_form_field.dart';
+import 'package:store_app/helpers/app_animations.dart';
 import 'package:store_app/helpers/app_images.dart';
 import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
@@ -244,7 +246,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         backgroundColor: Colors.blue,
                       ),
                       child: (isLoading)
-                          ? const CircularProgressIndicator()
+                          ? LottieBuilder.asset(AppAnimations.loadingAnimation)
                           : const SubTitleTextWidget(
                               lable: 'Sign up',
                             ),
