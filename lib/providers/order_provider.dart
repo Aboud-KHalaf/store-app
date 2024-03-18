@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/models/order_model.dart';
 
@@ -8,9 +7,6 @@ class OrdersProvider with ChangeNotifier {
   List<OrdersModelAdvanced> get getOrders => orders;
 
   Future<List<OrdersModelAdvanced>> fetchOrder() async {
-    final auth = FirebaseAuth.instance;
-    User? user = auth.currentUser;
-    var uid = user!.uid;
     try {
       await FirebaseFirestore.instance
           .collection("ordersAdvanced")

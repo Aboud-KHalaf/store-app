@@ -6,7 +6,6 @@ import 'package:store_app/models/order_model.dart';
 import 'package:store_app/providers/order_provider.dart';
 import 'package:store_app/widgets/app_bar_row_widget.dart';
 import 'package:store_app/widgets/order_widget_free.dart';
-import 'package:store_app/widgets/title_text_widget.dart';
 
 class AllOrdersScreen extends StatefulWidget {
   static const routeName = '/OrderScreen';
@@ -41,10 +40,10 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
             } else if (!snapshot.hasData || ordersProvider.getOrders.isEmpty) {
               return CustomEmptyCartWidget(
                 image: AppImages.imagesBagOrder,
-                title: "No orders has been placed yet",
-                subTitile: "",
+                title: "Opps",
+                text: "No orders has been placed yet",
                 buttonText: "Shop now",
-                text: '',
+                subTitile: 'you have not any orders',
                 onPressed: () {},
               );
             }

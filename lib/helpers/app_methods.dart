@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:store_app/providers/theme_provider.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
 abstract class AppMethods {
@@ -13,7 +15,9 @@ abstract class AppMethods {
         ),
         duration: const Duration(seconds: 3),
         showCloseIcon: true,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Provider.of<ThemeProvider>(context).isDarkTheme
+            ? Colors.white
+            : Colors.black,
         content: Text(
           text,
           style: const TextStyle(

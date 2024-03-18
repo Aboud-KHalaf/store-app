@@ -22,7 +22,6 @@ class WishListScreen extends StatelessWidget {
         Provider.of<WishListProvider>(context);
     List<WishModel> wishList = wishListProvider.getCartItems.values.toList();
 
-    // ignore: unnecessary_null_comparison
     return wishList.isEmpty
         ? CustomEmptyCartWidget(
             image: AppImages.imagesBagBagWish,
