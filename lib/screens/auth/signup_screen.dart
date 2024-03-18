@@ -10,7 +10,6 @@ import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/helpers/app_validator.dart';
 import 'package:store_app/providers/auth_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
-import 'package:store_app/root_screen.dart';
 import 'package:store_app/widgets/app_title_widget.dart';
 import 'package:store_app/widgets/pick_image_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
