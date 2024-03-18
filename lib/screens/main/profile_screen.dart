@@ -116,7 +116,16 @@ class ProfileScreen extends StatelessWidget {
                   CustomListTile(
                     imageUrl: AppImages.imagesProfileAddress,
                     title: 'Address',
-                    ontap: () {},
+                    ontap: () {
+                      AppMethods.showErrorOrWaringDialog(
+                        context: context,
+                        subTitle: 'This feature is not available now',
+                        image: AppImages.imagesAddressMap,
+                        fcn: () {
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
                   ),
                   const Divider(thickness: 1),
                   const TitleTextWidget(title: 'Settings'),

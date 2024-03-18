@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/root_screen.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 
 class GuestButton extends StatelessWidget {
@@ -14,7 +15,9 @@ class GuestButton extends StatelessWidget {
         lable: 'Guest',
         fontSize: 14,
       ),
-      onPressed: () async {},
+      onPressed: () async {
+        Navigator.pushReplacementNamed(context, RootScreen.routeName);
+      },
     );
   }
 }
