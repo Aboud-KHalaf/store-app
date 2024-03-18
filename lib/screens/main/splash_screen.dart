@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:store_app/helpers/app_animations.dart';
 import 'package:store_app/helpers/app_images.dart';
+import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/providers/cart_provider.dart';
 import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/providers/wishList_provider.dart';
 import 'package:store_app/root_screen.dart';
+import 'package:store_app/widgets/app_bar_row_widget.dart';
+import 'package:store_app/widgets/shimmer_text_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await fetchFCT();
     });
-    _navigateToRoot();
+    // _navigateToRoot();
     super.initState();
   }
 
@@ -64,11 +69,23 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
-        child: Image.asset(
-          AppImages.imagesBagShoppingBasket,
-          width: s.width * 0.5,
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(width: double.infinity),
+          Lottie.asset(
+            AppAnimations.shopingCartAnimation,
+            repeat: false,
+            width: s.width * 0.6,
+          ),
+          const SizedBox(height: 10),
+          const ShimmerText(
+            fontSize: 35,
+            fontWeight: FontWeight.bold,
+            text: AppTexts.appName,
+          ),
+        ],
       ),
     );
   }
