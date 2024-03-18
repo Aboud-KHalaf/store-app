@@ -35,13 +35,12 @@ class _CartScreenState extends State<CartScreen> {
     List<CartModel> cartList = cartProvider.getCartItems.values.toList();
 
     return cartList.isEmpty
-        ? CustomEmptyCartWidget(
+        ? const CustomEmptyCartWidget(
             image: AppImages.imagesBagShoppingBasket,
             title: AppTexts.woops,
             subTitile: AppTexts.emptyCart,
             text: AppTexts.goShoping,
             buttonText: 'Shop now',
-            onPressed: () {},
           )
         : Scaffold(
             bottomSheet: (isLoading)

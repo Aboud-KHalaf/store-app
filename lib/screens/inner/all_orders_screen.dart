@@ -38,13 +38,12 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                     "An error has been occured ${snapshot.error}"),
               );
             } else if (!snapshot.hasData || ordersProvider.getOrders.isEmpty) {
-              return CustomEmptyCartWidget(
+              return const CustomEmptyCartWidget(
                 image: AppImages.imagesBagOrder,
                 title: "Opps",
                 text: "No orders has been placed yet",
                 buttonText: "Shop now",
                 subTitile: 'you have not any orders',
-                onPressed: () {},
               );
             }
             return ListView.separated(

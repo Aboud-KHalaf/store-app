@@ -25,13 +25,12 @@ class ViewedRecently extends StatelessWidget {
         viewedRecentProider.getViewdRecentList;
 
     return viewedRecentList.isEmpty
-        ? CustomEmptyCartWidget(
+        ? const CustomEmptyCartWidget(
             image: AppImages.imagesProfileRecent,
             title: AppTexts.woops,
             subTitile: AppTexts.emptyWishList,
             text: AppTexts.goShoping,
             buttonText: 'Shop now',
-            onPressed: () {},
           )
         : Scaffold(
             appBar: AppBar(

@@ -23,13 +23,12 @@ class WishListScreen extends StatelessWidget {
     List<WishModel> wishList = wishListProvider.getCartItems.values.toList();
 
     return wishList.isEmpty
-        ? CustomEmptyCartWidget(
+        ? const CustomEmptyCartWidget(
             image: AppImages.imagesBagBagWish,
             title: AppTexts.woops,
             subTitile: AppTexts.emptyWishList,
             text: AppTexts.goShoping,
             buttonText: 'Shop now',
-            onPressed: () {},
           )
         : Scaffold(
             appBar: AppBar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/screens/main/search_screen.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
 import 'package:store_app/widgets/title_text_widget.dart';
 
@@ -9,11 +10,9 @@ class CustomEmptyCartWidget extends StatelessWidget {
       required this.subTitile,
       required this.text,
       required this.buttonText,
-      required this.onPressed,
       required this.image});
 
   final String title, subTitile, text, buttonText, image;
-  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,10 @@ class CustomEmptyCartWidget extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(elevation: 8),
-                onPressed: onPressed,
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushReplacementNamed(SearchScreen.pageRoute);
+                },
                 child: SubTitleTextWidget(
                   lable: buttonText,
                   color: Colors.blue,
