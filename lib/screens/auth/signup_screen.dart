@@ -215,6 +215,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
+                    isPassword: true,
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     hintText: 'password',
@@ -228,6 +229,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
+                    isPassword: true,
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
                     hintText: 'Confirm password',

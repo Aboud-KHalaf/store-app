@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import 'package:store_app/providers/product_provider.dart';
 import 'package:store_app/providers/user_provider.dart';
 import 'package:store_app/providers/wishList_provider.dart';
 import 'package:store_app/root_screen.dart';
+import 'package:store_app/screens/auth/signin_screen.dart';
 import 'package:store_app/widgets/shimmer_text_widget.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,11 +24,17 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 3));
     if (mounted) {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const RootScreen()));
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              (user != null) ? const RootScreen() : const SigninScreen(),
+        ),
+      );
     }
   }
 
   bool isLoadingProds = false;
+  User? user;
 
   @override
   void initState() {
@@ -46,6 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
+      user = FirebaseAuth.instance.currentUser;
       Future.wait({
         productsProvider.getProductsFuture(),
       });

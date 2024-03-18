@@ -147,6 +147,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
+                        textStyle: const TextStyle(color: Colors.black),
                       ),
                       child: (isLoading)
                           ? LottieBuilder.asset(AppAnimations.loadingAnimation)

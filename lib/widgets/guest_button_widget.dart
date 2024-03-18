@@ -10,7 +10,10 @@ class GuestButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        textStyle: const TextStyle(color: Colors.black),
+      ),
       child: const SubTitleTextWidget(
         lable: 'Guest',
         fontSize: 14,

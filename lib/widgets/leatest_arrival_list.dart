@@ -12,10 +12,8 @@ class LeatestArrivalListViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return SizedBox(
-      height: size.height * 0.16,
+      height: 100,
       child: Consumer<ProductProvider>(
         builder: (context, productProvider, child) {
           if (productProvider.getProductList.isEmpty) {

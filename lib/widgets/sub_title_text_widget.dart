@@ -10,6 +10,7 @@ class SubTitleTextWidget extends StatelessWidget {
     this.fontStyle = FontStyle.normal,
     this.fontWeight = FontWeight.normal,
     this.textDecoration = TextDecoration.none,
+    this.textAlign = TextAlign.center,
   });
 
   final String lable;
@@ -19,13 +20,14 @@ class SubTitleTextWidget extends StatelessWidget {
   final TextDecoration textDecoration;
   final Color? color;
   final int? maxLines;
+  final TextAlign textAlign;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       lable,
       maxLines: maxLines,
-      textAlign: TextAlign.center,
+      textAlign: textAlign,
       style: TextStyle(
         color: color,
         fontSize: fontSize,

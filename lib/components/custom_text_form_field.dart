@@ -34,7 +34,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       focusNode: widget.focusNode,
       textInputAction: TextInputAction.next,
       validator: widget.validator,
-      obscureText: obscureText,
+      obscureText: !obscureText,
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(16),
