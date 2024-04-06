@@ -128,6 +128,7 @@ class ProfileScreen extends StatelessWidget {
                       AppMethods.showErrorOrWaringDialog(
                         context: context,
                         subTitle: 'This feature is not available now',
+                        isError: false,
                         image: AppImages.imagesAddressMap,
                         fcn: () {
                           Navigator.pop(context);

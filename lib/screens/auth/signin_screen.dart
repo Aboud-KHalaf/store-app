@@ -7,15 +7,13 @@ import 'package:store_app/helpers/app_methods.dart';
 import 'package:store_app/helpers/app_text.dart';
 import 'package:store_app/helpers/app_validator.dart';
 import 'package:store_app/providers/auth_provider.dart';
-import 'package:store_app/root_screen.dart';
 import 'package:store_app/screens/auth/forget_password_screen.dart';
 import 'package:store_app/screens/auth/signup_screen.dart';
-import 'package:store_app/screens/main/splash_screen.dart';
-import 'package:store_app/widgets/app_title_widget.dart';
+import '../../widgets/app_title_widget.dart';
 import 'package:store_app/widgets/google_button_widget.dart';
 import 'package:store_app/widgets/guest_button_widget.dart';
 import 'package:store_app/widgets/sub_title_text_widget.dart';
-import 'package:store_app/widgets/title_text_widget.dart';
+import '../../widgets/title_text_widget.dart';
 
 class SigninScreen extends StatefulWidget {
   static const String pageRoute = '/signin';

@@ -100,11 +100,11 @@ class _SignupScreenState extends State<SignupScreen> {
               Navigator.of(context).pop();
             });
       } else {
-        setState(() {
-          isLoading = true;
-        });
         WidgetsBinding.instance.addPostFrameCallback((_) async {
           {
+            setState(() {
+              isLoading = true;
+            });
             var signUpRes =
                 await Provider.of<MyAuthProvider>(context, listen: false)
                     .signUp(email: email, password: password);
@@ -232,7 +232,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     focusNode: _confirmPasswordFocusNode,
                     hintText: 'Confirm password',
                     validator: (value) {
-                      return AppValidators.repeatPasswordValidator();
+                      return AppValidators.repeatPasswordValidator(
+                          password: _confirmPasswordController.text,
+                          value: _passwordController.text);
                     },
                     onFieldSubmitted: (value) {},
                     icon: Icons.password_outlined,

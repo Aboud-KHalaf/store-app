@@ -11,7 +11,7 @@ abstract class AppMethods {
           side: const BorderSide(color: Colors.purple),
           borderRadius: BorderRadius.circular(16),
         ),
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 2),
         showCloseIcon: true,
         backgroundColor: Colors.black12,
         content: Text(
