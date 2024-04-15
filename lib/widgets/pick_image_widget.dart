@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImageWidget extends StatelessWidget {
   const PickImageWidget({super.key, this.pickedImage, required this.function});
 
-  final XFile? pickedImage;
+  final CroppedFile? pickedImage;
   final void Function() function;
   @override
   Widget build(BuildContext context) {

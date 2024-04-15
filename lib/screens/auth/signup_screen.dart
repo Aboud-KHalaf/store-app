@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   final _formKey = GlobalKey<FormState>();
   XFile? pickedImage;
+  CroppedFile? _croppedImage;
   bool isLoading = false;
   String? userImage;
 
@@ -71,10 +73,12 @@ class _SignupScreenState extends State<SignupScreen> {
       context: context,
       cameraFun: () async {
         pickedImage = await imagePicker.pickImage(source: ImageSource.camera);
+        _croppedImage = await AppMethods.crop(file: pickedImage!);
         setState(() {});
       },
       galaryFun: () async {
         pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+        _croppedImage = await AppMethods.crop(file: pickedImage!);
         setState(() {});
       },
       removeFun: () {
@@ -182,7 +186,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       height: size.width * 0.4,
                       width: size.width * 0.4,
                       child: PickImageWidget(
-                        pickedImage: pickedImage,
+                        pickedImage: _croppedImage,
                         function: () async {
                           await localImagePicker();
                         },
